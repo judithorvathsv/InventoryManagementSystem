@@ -1,5 +1,5 @@
 Wireframe:
-![Inventory_Management_System5](https://github.com/user-attachments/assets/f2afebba-14ac-4fb4-bac7-b9e090eb249c)
+![Inventory_Management_System6](https://github.com/user-attachments/assets/32deae8a-d0e7-4eb1-abf1-1fd7f07549a8)
 
 User stories:
 
