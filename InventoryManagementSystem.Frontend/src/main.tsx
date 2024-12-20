@@ -6,7 +6,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App';
 import Login from './components/login';
-import Products from './components/Products';
+import Products from './components/products';
+import ProductForm from './components/productForm';
 
 const router = createBrowserRouter([
   {
@@ -25,12 +26,18 @@ const router = createBrowserRouter([
         path: "products", 
         element: <Products />,
       },
+      {
+        path: "addproduct", 
+        element: <ProductForm />,
+      },
+
+      
     ],
   },
 ]);
 
 createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>    
+   <React.StrictMode>    
         <RouterProvider router={router} />       
-  </React.StrictMode>
+   </React.StrictMode>
 )

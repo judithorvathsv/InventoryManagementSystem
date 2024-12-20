@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import "./App.css";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navBar";
 
 function App() {
   const location = useLocation();
@@ -9,7 +9,7 @@ function App() {
   return (
     <div className={isLogin ? "" : "flex h-screen"}>
       {!isLogin && <NavBar />}
-      <div className={isLogin ? "w-full" : ""}>
+      <div className={isLogin ? "w-full" : "flex-grow"}>
         <Outlet />
       </div>
     </div>
