@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import storage from "../../public/images/storage.jpg";
 const Login = () => {
   return (
@@ -37,9 +38,8 @@ const Login = () => {
               className="input input-bordered flex items-center gap-2 w-full"
             />
           </div>
-        </section>
-
-        <button className="mt-4 blueButton">Login</button>
+        </section>       
+        <Link className="mt-4 blueButton" to={"/products"}>Login</Link>
       </article>
     </article>
   );

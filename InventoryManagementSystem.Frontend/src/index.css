@@ -17,6 +17,12 @@
   --button-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 .blueButton {
   background-color: var(--medium-blue);
   color: white; 
@@ -40,4 +46,15 @@
 .label{
   font-size: 1rem;
 }
+
+
+.font-bolder {
+  font-weight: 470; 
+}
+
+.hover\:font-bolder:hover {
+  font-weight: 470; 
+}
+
+
 
