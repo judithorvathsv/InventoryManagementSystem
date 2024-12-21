@@ -9,5 +9,6 @@ namespace InventoryManagementSystem.Api.Models
         public double Quantity { get; set; }
         public double UnitPrice { get; set; }
         public int CategoryId { get; set; }
+        public Category Category {get;set;}
     }
 }

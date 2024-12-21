@@ -1,9 +1,10 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { Category, Product } from "../types";
+import { CategoryProps, ProductProps  } from "../types";
 import { fetchCategories } from "../utils/fetchCategory";
+import { useNavigate } from "react-router-dom";
 
 const ProductForm = () => {
-  const [product, setProduct] = useState<Product>({
+  const [product, setProduct] = useState<ProductProps>({
     productName: "",
     supplierName: "",
     purchaseDate: "",
@@ -12,8 +13,9 @@ const ProductForm = () => {
     categoryId: 0,
   });
 
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<CategoryProps[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate()
 
   useEffect(() => {
     let isMounted = true;
@@ -76,7 +78,15 @@ const ProductForm = () => {
         throw new Error("Failed to create product");
       }
 
-      handleCancel();
+      setProduct({
+        productName: "",
+        supplierName: "",
+        purchaseDate: "",
+        quantity: 0,
+        unitPrice: 0,
+        categoryId: 0,
+      });
+      setErrorMessage("");
     } catch (error) {
       console.error("Error creating product:", error);
       setErrorMessage("Failed to create product.");
@@ -93,119 +103,125 @@ const ProductForm = () => {
       categoryId: 0,
     });
     setErrorMessage("");
+
+    navigate("/products")
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 bg-white rounded shadow-md">
-      {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
+<form onSubmit={handleSubmit} className="p-8">
+<h2 className="mb-12 text-center title">Buy Product</h2>
+  {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
 
-      <div className="mb-4">
-        <label htmlFor="product-name" className="block text-sm font-medium">
-          Product Name
-        </label>
-        <input
-          type="text"
-          id="product-name"
-          name="productName"
-          value={product.productName}
-          onChange={handleChange}
-          className="input input-bordered flex items-center gap-2 w-full"
-          required
-        />
-      </div>
+  <div className="flex flex-col md:flex-row md:space-x-8 mb-8">
+    <div className="flex-1">
+      <label htmlFor="product-name" className="block text-sm font-medium">
+        Product Name
+      </label>
+      <input
+        type="text"
+        id="product-name"
+        name="productName"
+        value={product.productName}
+        onChange={handleChange}
+        className="input input-bordered w-full"
+        required
+      />
+    </div>
+    <div className="flex-1">
+      <label htmlFor="supplier-name" className="block text-sm font-medium">
+        Supplier Name
+      </label>
+      <input
+        type="text"
+        id="supplier-name"
+        name="supplierName"
+        value={product.supplierName}
+        onChange={handleChange}
+        className="input input-bordered w-full"
+        required
+      />
+    </div>
+  </div>
 
-      <div className="mb-4">
-        <label htmlFor="supplier-name" className="block text-sm font-medium">
-          Supplier Name
-        </label>
-        <input
-          type="text"
-          id="supplier-name"
-          name="supplierName"
-          value={product.supplierName}
-          onChange={handleChange}
-          className="input input-bordered flex items-center gap-2 w-full"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="category" className="block text-sm font-medium">
-          Category
-        </label>
-        <select
-          id="category"
-          name="categoryId"
-          value={product.categoryId}
-          onChange={handleCategoryChange}
-          className="select select-bordered w-full max-w-xs"
-          required
-        >
-          <option value="">Select a category</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="purchase-date" className="block text-sm font-medium">
-          Purchase Date
-        </label>
-        <input
-          type="date"
-          id="purchase-date"
-          name="purchaseDate"
-          value={product.purchaseDate}
-          onChange={handleChange}
-          className="input input-bordered flex items-center gap-2 w-full"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="quantity" className="block text-sm font-medium">
-          Quantity
-        </label>
-        <input
-          type="number"
-          id="quantity"
-          name="quantity"
-          value={product.quantity}
-          onChange={handleChange}
-          className="input input-bordered flex items-center gap-2 w-full"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="unit-price" className="block text-sm font-medium">
-          Unit Price
-        </label>
-        <input
-          type="number"
-          id="unit-price"
-          name="unitPrice"
-          value={product.unitPrice}
-          onChange={handleChange}
-          className="input input-bordered flex items-center gap-2 w-full"
-          required
-        />
-      </div>
-
-      <button type="submit" className="btn btn-primary">
-        Save
-      </button>
-      <button
-        type="button"
-        className="btn btn-secondary"
-        onClick={handleCancel}
+  <div className="flex flex-col md:flex-row md:space-x-8 mb-8">
+    <div className="flex-1">
+      <label htmlFor="category" className="block text-sm font-medium">
+        Category
+      </label>
+      <select
+        id="category"
+        name="categoryId"
+        value={product.categoryId}
+        onChange={handleCategoryChange}
+        className="select select-bordered w-full"
+        required
       >
-        Cancel
-      </button>
-    </form>
+        <option value="">Select a category</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.id}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div className="flex-1">
+      <label htmlFor="purchase-date" className="block text-sm font-medium">
+        Purchase Date
+      </label>
+      <input
+        type="date"
+        id="purchase-date"
+        name="purchaseDate"
+        value={product.purchaseDate}
+        onChange={handleChange}
+        className="input input-bordered w-full"
+        required
+      />
+    </div>
+  </div>
+
+  <div className="flex flex-col md:flex-row md:space-x-8 mb-10">
+    <div className="flex-1">
+      <label htmlFor="quantity" className="block text-sm font-medium">
+        Quantity
+      </label>
+      <input
+        type="number"
+        id="quantity"
+        name="quantity"
+        value={product.quantity}
+        onChange={handleChange}        
+        className="input input-bordered w-full"
+        required
+      />
+    </div>
+    <div className="flex-1">
+      <label htmlFor="unit-price" className="block text-sm font-medium">
+        Unit Price
+      </label>
+      <input
+        type="number"
+        id="unit-price"
+        name="unitPrice"
+        value={product.unitPrice}
+        onChange={handleChange}       
+        className="input input-bordered w-full"
+        required
+      />
+    </div>
+  </div>
+
+  <div className="flex gap-12 mt-4 justify-center">
+    <button type="submit" className="btn blue-button all-button">
+      Save
+    </button>
+
+    <button type="button" className="btn btn-active all-button" onClick={handleCancel}>
+      Cancel
+    </button>
+  </div>
+</form>
+
   );
 };
 

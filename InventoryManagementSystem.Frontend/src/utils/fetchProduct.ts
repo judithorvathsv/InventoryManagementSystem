@@ -1,11 +1,11 @@
-import { Product } from "../types";
+import { ProductDatabaseProps } from "../types";
 
 export const fetchProducts = async (): Promise<{
-  result?: Product[];
+  result?: ProductDatabaseProps[];
   errorMessage?: string;
 }> => {
   let errorMessage = "";
-  let result: Product[] = [];
+  let result: ProductDatabaseProps[] = [];
 
   try {
     const response = await fetch("http://localhost:5036/api/v1/products");

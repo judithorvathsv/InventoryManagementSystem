@@ -1,6 +1,7 @@
 using InventoryManagementSystem.Api.Mappers;
 using InventoryManagementSystem.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagementSystem.Api.Controllers
 {
@@ -16,8 +17,21 @@ namespace InventoryManagementSystem.Api.Controllers
         [HttpGet]
         public ActionResult<Product> GetProductList()
         {
-            var products = _context.Products.ToList();
-            var productResponses = products.Select(product => product.ToResponse()).ToList();
+            var products = _context.Products
+                    .Include(p => p.Category)
+                    .ToList();
+
+            var productResponses = products.Select(product =>
+            {
+                var productResponse = product.ToResponse();
+                productResponse.Category = new Category
+                {
+                    Id = product.Category.Id,
+                    Name = product.Category.Name
+                };
+                return productResponse;
+            }).ToList();
+
             return Ok(productResponses);
         }
 
