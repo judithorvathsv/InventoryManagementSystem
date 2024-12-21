@@ -109,7 +109,7 @@ const ProductForm = () => {
 
   return (
 <form onSubmit={handleSubmit} className="p-8">
-<h2 className="mb-12 text-center title">Buy Product</h2>
+<h2 className="mb-12 text-center title">New Purchase</h2>
   {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
 
   <div className="flex flex-col md:flex-row md:space-x-8 mb-8">

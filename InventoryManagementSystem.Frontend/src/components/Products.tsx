@@ -36,10 +36,10 @@ const Products = () => {
 
   return (
     <div className="flex flex-col items-center w-full p-4">
-      <h2 className="mb-4 text-center title">Products</h2>
+      <h2 className="mb-4 text-center title">All Products</h2>
 
       <Link className="mt-4 blue-button all-button" to={"/addproduct"}>
-        Buy new product
+      New Purchase
       </Link>
 
       {errorMessage && <div className="text-center">{errorMessage}</div>}
