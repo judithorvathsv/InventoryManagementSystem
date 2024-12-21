@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -7,44 +7,64 @@ const NavBar = () => {
 
       <ul className="flex flex-col space-y-4">
         <li>
-          <Link
+          <NavLink
             to="/products"
-            className="block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder"
+            className={({ isActive }) =>
+              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+                isActive ? "active-link font-bolder text-lg" : "text-black"
+              }`
+            }
           >
             Products
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/purchases"
-            className="block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder"
+            className={({ isActive }) =>
+              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+                isActive ? "active-link font-bolder text-lg" : "text-black"
+              }`
+            }
           >
             All Purchases
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/inventory"
-            className="block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder"
+            className={({ isActive }) =>
+              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+                isActive ? "active-link font-bolder text-lg" : "text-black"
+              }`
+            }
           >
             Inventory
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/incoming-purchases"
-            className="block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder"
+            className={({ isActive }) =>
+              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+                isActive ? "active-link font-bolder text-lg" : "text-black"
+              }`
+            }
           >
             Incoming Purchases
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/outgoing-orders"
-            className="block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder"
+            className={({ isActive }) =>
+              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+                isActive ? "active-link font-bolder text-lg" : "text-black"
+              }`
+            }
           >
             Outgoing Orders
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </aside>
