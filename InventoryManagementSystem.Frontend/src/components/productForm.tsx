@@ -127,7 +127,7 @@ const ProductForm = () => {
         required
       />
     </div>
-    <div className="flex-1">
+    <div className="flex-1 mt-8 md:mt-0">
       <label htmlFor="supplier-name" className="block text-sm font-medium">
         Supplier Name
       </label>
@@ -164,7 +164,7 @@ const ProductForm = () => {
         ))}
       </select>
     </div>
-    <div className="flex-1">
+    <div className="flex-1 mt-8 md:mt-0">
       <label htmlFor="purchase-date" className="block text-sm font-medium">
         Purchase Date
       </label>
@@ -195,7 +195,7 @@ const ProductForm = () => {
         required
       />
     </div>
-    <div className="flex-1">
+    <div className="flex-1 mt-8 md:mt-0">
       <label htmlFor="unit-price" className="block text-sm font-medium">
         Unit Price
       </label>
