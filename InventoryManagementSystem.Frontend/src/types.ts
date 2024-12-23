@@ -23,3 +23,14 @@ export type ProductDatabaseProps = {
   categoryId: number;
 };
 
+export type PurchaseProps = {
+  id: number;               
+  productName: string;      
+  supplierName: string;    
+  quantity: number;        
+  purchaseDate: string;    
+  unitPrice: number;       
+  totalCost: number;       
+  status: string;          
+};
+

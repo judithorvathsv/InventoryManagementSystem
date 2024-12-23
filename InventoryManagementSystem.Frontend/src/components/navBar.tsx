@@ -21,7 +21,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
 
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/addproduct"
+            to="/newpurchase"
             className={({ isActive }) =>
               `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"

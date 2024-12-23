@@ -19,5 +19,9 @@ namespace InventoryManagementSystem.Api.Models
 
         public virtual Product Product { get; set; }
 
+        public int PurchaseStatusId { get; set; }
+
+        public virtual PurchaseStatus PurchaseStatus { get; set; }
+
     }
 }

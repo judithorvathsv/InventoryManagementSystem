@@ -8,6 +8,7 @@ import App from './App';
 import Login from './components/login';
 import Products from './components/products';
 import PurchaseForm from './components/purchaseForm';
+import Purchases from './components/purchases';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         path: "newpurchase", 
         element: <PurchaseForm />,
       },
+      {
+        path: "purchases",
+        element: <Purchases/>
+      }
 
       
     ],

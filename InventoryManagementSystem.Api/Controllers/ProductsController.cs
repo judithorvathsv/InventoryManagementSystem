@@ -93,7 +93,8 @@ namespace InventoryManagementSystem.Api.Controllers
                 Quantity = request.Quantity,
                 SupplierName = request.SupplierName,
                 UnitPrice = request.UnitPrice,
-                PurchaseDate = DateTime.Parse(request.PurchaseDate)
+                PurchaseDate = DateTime.Parse(request.PurchaseDate),
+                PurchaseStatusId = 1
             };
 
             _context.Purchases.Add(purchase);
@@ -106,7 +107,8 @@ namespace InventoryManagementSystem.Api.Controllers
         public ActionResult<List<Purchase>> GetPurchases()
         {
             var purchases = _context.Purchases.Include(p => p.Product).ToList();
-            return Ok(purchases);
+            var purchaseResponses = purchases.Select(p => p.ToResponse()).ToList();
+            return Ok(purchaseResponses);
         }
 
     }
