@@ -10,10 +10,13 @@ namespace InventoryManagementSystem.Api.Mappers
             {
                 Id = purchase.Id,
                 ProductName = purchase.Product.ProductName,
+                ProductId = purchase.ProductId,
                 SupplierName = purchase.SupplierName,
                 Quantity = purchase.Quantity,
                 UnitPrice = purchase.UnitPrice,
                 PurchaseDate = purchase.PurchaseDate,
+                PurchaseStatusId = purchase.PurchaseStatusId,
+                Status = purchase.PurchaseStatus.Name
             };
         }
     }

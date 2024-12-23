@@ -15,7 +15,7 @@ const Purchases = () => {
       if (errorMessage) {
         setErrorMessage(errorMessage);
       } else if (isMounted) {
-        setPurchases(result || []);
+        setPurchases(result || []); 
       }
     };
 
@@ -59,7 +59,8 @@ const Purchases = () => {
                   <td className="border border-gray-300 p-2">{purchase.quantity}</td>
                   <td className="border border-gray-300 p-2">{new Date(purchase.purchaseDate).toLocaleDateString()}</td>
                   <td className="border border-gray-300 p-2">{(purchase.quantity * purchase.unitPrice).toFixed(2)}</td>
-                  <td className="border border-gray-300 p-2">{purchase.status}</td>
+                  <td className={`border border-gray-300 p-2 ${purchase.status === "Incoming" ? "text-green-600" : purchase.status === "Returned" ? "text-red-500" : ""}`}>
+                  {purchase.status}</td>
                 </tr>
               ))}
             </tbody>
@@ -75,7 +76,9 @@ const Purchases = () => {
                 <p><strong>Quantity:</strong> {purchase.quantity}</p>
                 <p><strong>Purchase Date:</strong> {new Date(purchase.purchaseDate).toLocaleDateString()}</p>
                 <p><strong>Total Cost:</strong> {(purchase.quantity * purchase.unitPrice).toFixed(2)}</p>
-                <p><strong>Status:</strong> {purchase.status}</p>
+                <p><strong>Status:</strong> <span className={`${purchase.status === "Incoming" ? "text-green-600" : purchase.status === "Returned" ? "text-red-500" : ""}`}>
+                    {purchase.status}
+                  </span></p>
               </div>
             ))}
           </div>

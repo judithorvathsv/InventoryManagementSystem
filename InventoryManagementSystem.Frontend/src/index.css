@@ -53,6 +53,7 @@
 
 .title{
   font-size: var(--title-font-size);
+  margin-top: 1rem;
 }
 
 .label{

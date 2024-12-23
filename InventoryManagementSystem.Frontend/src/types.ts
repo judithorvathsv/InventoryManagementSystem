@@ -25,12 +25,20 @@ export type ProductDatabaseProps = {
 
 export type PurchaseProps = {
   id: number;               
-  productName: string;      
+  productName: string;   
+  productId: number;   
   supplierName: string;    
-  quantity: number;        
+  quantity: number;      
   purchaseDate: string;    
   unitPrice: number;       
   totalCost: number;       
-  status: string;          
+  status: string;   
+  purchaseStatusId:number;   
 };
+
+export type PurchaseSummary = {
+  totalQuantity: number;
+  suppliers: Set<string>;
+  totalQuantityPending:number;  
+}
 
