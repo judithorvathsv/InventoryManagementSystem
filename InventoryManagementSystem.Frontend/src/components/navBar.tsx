@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
   return (
     <aside className="flex flex-col w-52 bg-gray-200 p-4 h-full ">
       <h2 className="title mb-4 font-bolder">Menu</h2>
 
       <ul className="flex flex-col space-y-4">
-        <li>
+        <li onClick={hideMobileNavBar}>
           <NavLink
             to="/products"
             className={({ isActive }) =>
@@ -19,7 +19,7 @@ const NavBar = () => {
           </NavLink>
         </li>
 
-        <li>
+        <li onClick={hideMobileNavBar}>
           <NavLink
             to="/addproduct"
             className={({ isActive }) =>
@@ -32,7 +32,7 @@ const NavBar = () => {
           </NavLink>
         </li>
 
-        <li>
+        <li onClick={hideMobileNavBar}>
           <NavLink
             to="/purchases"
             className={({ isActive }) =>
@@ -44,7 +44,7 @@ const NavBar = () => {
             All Purchases
           </NavLink>
         </li>
-        <li>
+        <li onClick={hideMobileNavBar}>
           <NavLink
             to="/inventory"
             className={({ isActive }) =>
@@ -56,7 +56,7 @@ const NavBar = () => {
             Inventory
           </NavLink>
         </li>
-        <li>
+        <li onClick={hideMobileNavBar}>
           <NavLink
             to="/incoming-purchases"
             className={({ isActive }) =>
@@ -68,7 +68,7 @@ const NavBar = () => {
             Incoming Purchases
           </NavLink>
         </li>
-        <li>
+        <li onClick={hideMobileNavBar}>
           <NavLink
             to="/outgoing-orders"
             className={({ isActive }) =>
