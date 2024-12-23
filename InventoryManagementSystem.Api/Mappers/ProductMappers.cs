@@ -9,10 +9,6 @@ namespace InventoryManagementSystem.Api.Mappers
             return new Product
             {
                 ProductName = request.ProductName,
-                SupplierName = request.SupplierName,
-                PurchaseDate = request.PurchaseDate,
-                Quantity = request.Quantity,
-                UnitPrice = request.UnitPrice,
                 CategoryId = request.CategoryId
             };
         }
@@ -21,12 +17,10 @@ namespace InventoryManagementSystem.Api.Mappers
         {
             return new ProductResponse
             {
+                Id = product.Id,
                 ProductName = product.ProductName,
-                SupplierName = product.SupplierName,
-                PurchaseDate = product.PurchaseDate,
-                Quantity = product.Quantity,
-                UnitPrice = product.UnitPrice,
-                CategoryId = product.CategoryId
+                CategoryId = product.CategoryId,
+                CategoryName = product.Category.Name
             };
         }
     }

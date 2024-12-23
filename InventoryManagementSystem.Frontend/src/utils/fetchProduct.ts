@@ -10,11 +10,10 @@ export const fetchProducts = async (): Promise<{
   try {
     const response = await fetch("http://localhost:5036/api/v1/products");
 
-    if (!response.ok) {
+    if (!response.ok) {     
       errorMessage = "Failed to fetch the products";
       throw new Error("Failed to fetch the products");
     }
-
     result = await response.json();
   } catch (error: unknown) {
     if (error instanceof Error) {

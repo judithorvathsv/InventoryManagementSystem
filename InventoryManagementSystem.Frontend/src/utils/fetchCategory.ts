@@ -1,11 +1,11 @@
-import { Category } from "../types";
+import { CategoryProps } from "../types";
 
 export const fetchCategories = async (): Promise<{
-  result?: Category[];
+  result?: CategoryProps[];
   errorMessage?: string;
 }> => {
   let errorMessage = "";
-  let result: Category[] = [];
+  let result: CategoryProps[] = [];
 
   try {
     const response = await fetch("http://localhost:5036/api/v1/categories");

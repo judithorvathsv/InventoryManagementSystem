@@ -38,7 +38,7 @@ const Products = () => {
     <div className="flex flex-col items-center w-full p-4">
       <h2 className="mb-4 text-center title">All Products</h2>
 
-      <Link className="blue-button all-button self-end mb-4" to={"/addproduct"}>
+      <Link className="blue-button all-button self-end mb-4" to={"/newpurchase"}>
       New Purchase
       </Link>
 
@@ -53,8 +53,8 @@ const Products = () => {
         <tr>
           <th className="border border-gray-300 p-2">Product Name</th>
           <th className="border border-gray-300 p-2">Category</th>
-          <th className="border border-gray-300 p-2">Quantity</th>
-          <th className="border border-gray-300 p-2">Supplier Name</th>
+          {/* <th className="border border-gray-300 p-2">Quantity</th>
+          <th className="border border-gray-300 p-2">Supplier Name</th> */}
           <th className="border border-gray-300 p-2">Actions</th>
         </tr>
       </thead>
@@ -62,9 +62,9 @@ const Products = () => {
         {products.map((product) => (
           <tr key={product.id}>
             <td className="border border-gray-300 p-2">{product.productName}</td>
-            <td className="border border-gray-300 p-2">{product.category?.name || 'N/A'}</td>
-            <td className="border border-gray-300 p-2">{product.quantity}</td>
-            <td className="border border-gray-300 p-2">{product.supplierName}</td>
+            <td className="border border-gray-300 p-2">{product.categoryName || 'N/A'}</td>
+            {/* <td className="border border-gray-300 p-2">{product.quantity}</td>
+            <td className="border border-gray-300 p-2">{product.supplierName}</td> */}
             <td className="border border-gray-300 p-2">
               <button onClick={() => handleBuyAgain(product.id)} className="blue-button all-button">
               Purchase Again
@@ -83,9 +83,9 @@ const Products = () => {
       {products.map((product) => (
         <div key={product.id} className="border-b border-gray-300 mb-4 p-4">
           <h3 className="font-bold">{product.productName}</h3>
-          <p><strong>Category:</strong> {product.category?.name || 'N/A'}</p>
-          <p><strong>Quantity:</strong> {product.quantity}</p>
-          <p><strong>Supplier:</strong> {product.supplierName}</p>
+          <p><strong>Category:</strong> {product.categoryName}</p>
+          {/* <p><strong>Quantity:</strong> {product.quantity}</p>
+          <p><strong>Supplier:</strong> {product.supplierName}</p> */}
           <div className="mt-2">
             <button onClick={() => handleBuyAgain(product.id)} className="blue-button all-button mr-2">
               Purchase Again

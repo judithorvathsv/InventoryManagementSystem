@@ -10,8 +10,8 @@ namespace InventoryManagementSystem.Api
         }
 
         public DbSet<Product> Products { get; set; }
-
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
 
         public static void SeedCategories(ModelBuilder modelBuilder)
         {

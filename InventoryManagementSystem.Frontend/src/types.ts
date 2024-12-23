@@ -19,6 +19,7 @@ export type ProductDatabaseProps = {
   purchaseDate: string;
   quantity: number;
   unitPrice: number;
+  categoryName: string;
   categoryId: number;
-  category: CategoryProps
-}
+};
+

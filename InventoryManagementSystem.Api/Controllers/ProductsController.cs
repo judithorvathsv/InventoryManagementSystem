@@ -14,6 +14,8 @@ namespace InventoryManagementSystem.Api.Controllers
             _context = context;
         }
 
+
+
         [HttpGet]
         public ActionResult<Product> GetProductList()
         {
@@ -24,11 +26,6 @@ namespace InventoryManagementSystem.Api.Controllers
             var productResponses = products.Select(product =>
             {
                 var productResponse = product.ToResponse();
-                productResponse.Category = new Category
-                {
-                    Id = product.Category.Id,
-                    Name = product.Category.Name
-                };
                 return productResponse;
             }).ToList();
 
@@ -65,6 +62,51 @@ namespace InventoryManagementSystem.Api.Controllers
             }
 
             return Ok(product.ToResponse());
+        }
+
+        [HttpPost("purchase")]
+        public async Task<ActionResult<Purchase>> CreatePurchase(AddProductRequest request)
+        {
+            var existingProduct = await _context.Products
+                .FirstOrDefaultAsync(p => p.ProductName == request.ProductName && p.CategoryId == request.CategoryId);
+
+            Product product;
+            if (existingProduct is null)
+            {
+                product = new Product
+                {
+                    ProductName = request.ProductName,
+                    CategoryId = request.CategoryId
+                };
+
+                _context.Products.Add(product);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                product = existingProduct;
+            }
+
+            var purchase = new Purchase
+            {
+                ProductId = product.Id,
+                Quantity = request.Quantity,
+                SupplierName = request.SupplierName,
+                UnitPrice = request.UnitPrice,
+                PurchaseDate = DateTime.Parse(request.PurchaseDate)
+            };
+
+            _context.Purchases.Add(purchase);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetPurchases), new { id = purchase.Id }, purchase);
+        }
+
+        [HttpGet("purchases")]
+        public ActionResult<List<Purchase>> GetPurchases()
+        {
+            var purchases = _context.Purchases.Include(p => p.Product).ToList();
+            return Ok(purchases);
         }
 
     }

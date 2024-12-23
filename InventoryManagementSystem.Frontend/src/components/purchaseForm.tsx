@@ -3,7 +3,7 @@ import { CategoryProps, ProductProps  } from "../types";
 import { fetchCategories } from "../utils/fetchCategory";
 import { useNavigate } from "react-router-dom";
 
-const ProductForm = () => {
+const PurchaseForm = () => {
   const [product, setProduct] = useState<ProductProps>({
     productName: "",
     supplierName: "",
@@ -68,14 +68,14 @@ const ProductForm = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5036/api/v1/products", {
+      const response = await fetch("http://localhost:5036/api/v1/products/purchase", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formattedProduct),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create product");
+        throw new Error("Failed to create purchase");
       }
 
       setProduct({
@@ -88,8 +88,8 @@ const ProductForm = () => {
       });
       setErrorMessage("");
     } catch (error) {
-      console.error("Error creating product:", error);
-      setErrorMessage("Failed to create product.");
+      console.error("Error creating purchase:", error);
+      setErrorMessage("Failed to create purchase.");
     }
   };
 
@@ -108,7 +108,7 @@ const ProductForm = () => {
   };
 
   return (
-<form onSubmit={handleSubmit} className="p-8">
+<form onSubmit={handleSubmit} className="p-4">
 <h2 className="mb-12 text-center title">New Purchase</h2>
   {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
 
@@ -225,4 +225,4 @@ const ProductForm = () => {
   );
 };
 
-export default ProductForm;
+export default PurchaseForm;

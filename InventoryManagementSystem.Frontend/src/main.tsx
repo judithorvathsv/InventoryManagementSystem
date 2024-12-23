@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import Login from './components/login';
 import Products from './components/products';
-import ProductForm from './components/productForm';
+import PurchaseForm from './components/purchaseForm';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
         element: <Products />,
       },
       {
-        path: "addproduct", 
-        element: <ProductForm />,
+        path: "newpurchase", 
+        element: <PurchaseForm />,
       },
 
       
