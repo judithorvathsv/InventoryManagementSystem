@@ -110,7 +110,7 @@ const Inventory = () => {
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.productName}</td>
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.categoryName || 'N/A'}</td>
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.totalQuantity}</td>
-            <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.totalQuantityPending}</td>
+            <td className="border border-gray-300 p-2 w-1/6 whitespace-normal green-text">{product.totalQuantityPending}</td>
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.fullTotal}</td>  
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.unitPrice}</td>
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.totalValue}</td>
@@ -135,11 +135,11 @@ const Inventory = () => {
     </div>
     <div className="flex items-center mb-2">
         <label className="font-bold w-1/3">Pending orders:</label>
-        <p className="w-2/3">{product.totalQuantityPending} kg</p>
+        <p className="w-2/3 green-text">{product.totalQuantityPending} kg</p>
     </div>
     <div className="flex items-center mb-2">
         <label className="font-bold w-1/3">Total:</label>
-        <p className="font-bold w-2/3">{product.fullTotal} kg</p>
+        <p className="w-2/3">{product.fullTotal} kg</p>
     </div>
     <div className="flex items-center mb-2">
         <label className="font-bold w-1/3">Unit Price:</label>
