@@ -218,13 +218,13 @@ const PurchaseForm = () => {
       </div>
 
       <div className="flex gap-12 mt-4 justify-center">
-        <button type="submit" className="btn blue-button all-button">
+        <button type="submit" className="blue-button all-button">
           Save
         </button>
 
         <button
           type="button"
-          className="btn btn-active all-button"
+          className="grey-button all-button"
           onClick={handleCancel}
         >
           Cancel

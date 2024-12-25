@@ -271,9 +271,9 @@ const Products = () => {
               <tr>
                 <th className="border border-gray-300 p-2">Product Name</th>
                 <th className="border border-gray-300 p-2">Category</th>
-                <th className="border border-gray-300 p-2">In stock</th>
-                <th className="border border-gray-300 p-2">Pending orders</th>
-                <th className="border border-gray-300 p-2">Supplier Name</th>
+                <th className="border border-gray-300 p-2">In stock (kg)</th>
+                <th className="border border-gray-300 p-2">Pending orders (kg)</th>
+                <th className="border border-gray-300 p-2">Supplier Name(s)</th>
                 <th className="border border-gray-300 p-2">Actions</th>
               </tr>
             </thead>
@@ -341,7 +341,7 @@ const Products = () => {
                 </div>
 
                 <div className="flex items-center mb-2">
-                  <label className="font-bold w-1/3">Supplier:</label>
+                  <label className="font-bold w-1/3">Supplier(s):</label>
                   <p className="w-2/3">{product.suppliersList}</p>
                 </div>
 
