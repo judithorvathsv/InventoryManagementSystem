@@ -72,11 +72,6 @@ const IncomingPurchases = () => {
                 </div>
             )}
 
-
-
-
-
-
       {incomingPurchases.length > 0 ? (
         <div className="overflow-x-auto w-full">
           {/* --- Desktop View --- */}
@@ -85,11 +80,11 @@ const IncomingPurchases = () => {
               <tr>
                 <th className="border border-gray-300 p-2">Purchase ID</th>
                 <th className="border border-gray-300 p-2">Product Name</th>
-                <th className="border border-gray-300 p-2">Supplier Name</th>
-                <th className="border border-gray-300 p-2">Quantity</th>
+                <th className="border border-gray-300 p-2">Supplier Name(s)</th>
+                <th className="border border-gray-300 p-2">Quantity (kg)</th>
                 <th className="border border-gray-300 p-2">Purchase Date</th>
-                <th className="border border-gray-300 p-2">Total Cost</th>
-                <th className="border border-gray-300 p-2">Status</th>
+                <th className="border border-gray-300 p-2">Total Cost (sek)</th>
+                <th className="border border-gray-300 p-2">Actions</th>             
               </tr>
             </thead>
             <tbody>
@@ -101,8 +96,7 @@ const IncomingPurchases = () => {
                   <td className="border border-gray-300 p-2">{purchase.quantity}</td>
                   <td className="border border-gray-300 p-2">{new Date(purchase.purchaseDate).toLocaleDateString()}</td>
                   <td className="border border-gray-300 p-2">{(purchase.quantity * purchase.unitPrice).toFixed(2)}</td>
-                  <td className={`border border-gray-300 p-2 ${purchase.status === "Incoming" ? "green-text" : purchase.status === "Returned" ? "red-text" : ""}`}>
-                  {purchase.status}</td>
+
                   <td className="border border-gray-300 p-2 w-full md:w-48">
                     <div className="flex flex-col md:flex-row md:space-x-2">
                       <button
@@ -127,31 +121,91 @@ const IncomingPurchases = () => {
           {/* --- Mobile View --- */}
           <div className="block md:hidden">
             {incomingPurchases.map((purchase) => (
-              <div key={purchase.id} className="border-b border-gray-300 mb-4 p-4">
-                <h3 className="font-bold">Purchase ID: {purchase.id}</h3>
-                <p><strong>Product:</strong> {purchase.productName}</p>
-                <p><strong>Supplier:</strong> {purchase.supplierName}</p>
-                <p><strong>Quantity:</strong> {purchase.quantity}</p>
-                <p><strong>Purchase Date:</strong> {new Date(purchase.purchaseDate).toLocaleDateString()}</p>
-                <p><strong>Total Cost:</strong> {(purchase.quantity * purchase.unitPrice).toFixed(2)}</p>
-                <p><strong>Status:</strong> <span className={`${purchase.status === "Incoming" ? "green-text" : purchase.status === "Returned" ? "red-text" : ""}`}>
-                    {purchase.status}
-                  </span></p>
-                  <div className="flex flex-col md:flex-row md:space-x-2">
-                      <button
-                        onClick={() => handleReceive(purchase)}
-                        className="blue-button all-button mb-2 md:mb-0"
-                      >
-                        Receive
-                      </button>
-                      <button
-                        onClick={() => handleReturn(purchase)}
-                        className="navy-button all-button mb-2 md:mb-0"
-                      >
-                        Return
-                      </button>
-                    </div>
-              </div>
+
+<div
+key={purchase.id}
+className="border border-gray-300 mb-4 p-4"
+>
+<div className="flex flex-wrap items-center mb-2">
+  <label className="font-bold w-1/3">Purchase ID:</label>
+  <p className="w-2/3">{purchase.id}</p>
+</div>
+<div className="flex items-center mb-2">
+  <label className="font-bold w-1/3">Product:</label>
+  <p className="w-2/3">{purchase.productName}</p>
+</div>
+<div className="flex items-center mb-2">
+  <label className="font-bold w-1/3">Supplier(s):</label>
+  <p className="w-2/3">{purchase.supplierName} </p>
+</div>
+
+<div className="flex items-center mb-2">
+  <label className="font-bold w-1/3">Quantity:</label>
+  <p className="w-2/3">{purchase.quantity} kg</p>
+</div>
+
+<div className="flex items-center mb-2">
+  <label className="font-bold w-1/3">Date:</label>
+  <p className="w-2/3">
+    {new Date(purchase.purchaseDate).toLocaleDateString()}
+  </p>
+</div>
+
+<div className="flex items-center mb-2">
+  <label className="font-bold w-1/3">Total Cost:</label>
+  <p className="w-2/3">
+    {(purchase.quantity * purchase.unitPrice).toFixed(2)} sek
+  </p>
+</div>
+
+<div className="flex items-center mb-2">
+                  <button
+                    onClick={() => handleReceive(purchase)}
+                    className="blue-button all-button mr-2 mt-2"
+                  >
+                    Receive
+                  </button>
+                  <button
+                    onClick={() => handleReturn(purchase)}
+                    className="navy-button all-button mt-2"
+                  >
+                    Return
+                  </button>
+                </div>
+
+</div>    
+
+
+
+
+
+
+
+              // <div key={purchase.id} className="border-b border-gray-300 mb-4 p-4">
+              //   <h3 className="font-bold">Purchase ID: {purchase.id}</h3>
+              //   <p><strong>Product:</strong> {purchase.productName}</p>
+              //   <p><strong>Supplier:</strong> {purchase.supplierName}</p>
+              //   <p><strong>Quantity:</strong> {purchase.quantity}</p>
+              //   <p><strong>Purchase Date:</strong> {new Date(purchase.purchaseDate).toLocaleDateString()}</p>
+              //   <p><strong>Total Cost:</strong> {(purchase.quantity * purchase.unitPrice).toFixed(2)}</p>
+              //   <p><strong>Status:</strong> <span className={`${purchase.status === "Incoming" ? "green-text" : purchase.status === "Returned" ? "red-text" : ""}`}>
+              //       {purchase.status}
+              //     </span></p>
+              //     <div className="flex flex-col md:flex-row md:space-x-2">
+              //         <button
+              //           onClick={() => handleReceive(purchase)}
+              //           className="blue-button all-button mb-2 md:mb-0"
+              //         >
+              //           Receive
+              //         </button>
+              //         <button
+              //           onClick={() => handleReturn(purchase)}
+              //           className="navy-button all-button mb-2 md:mb-0"
+              //         >
+              //           Return
+              //         </button>
+              //       </div>
+              // </div>
             ))}
           </div>
 

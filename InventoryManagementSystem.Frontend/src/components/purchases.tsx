@@ -121,45 +121,7 @@ const Purchases = () => {
                     {purchase.status}
                   </p>
                 </div>
-              </div>
-
-              // <div
-              //   key={purchase.id}
-              //   className="border-b border-gray-300 mb-4 p-4"
-              // >
-              //   <h3 className="font-bold">Purchase ID: {purchase.id}</h3>
-              //   <p>
-              //     <strong>Product:</strong> {purchase.productName}
-              //   </p>
-              //   <p>
-              //     <strong>Supplier:</strong> {purchase.supplierName}
-              //   </p>
-              //   <p>
-              //     <strong>Quantity:</strong> {purchase.quantity}
-              //   </p>
-              //   <p>
-              //     <strong>Purchase Date:</strong>{" "}
-              //     {new Date(purchase.purchaseDate).toLocaleDateString()}
-              //   </p>
-              //   <p>
-              //     <strong>Total Cost:</strong>{" "}
-              //     {(purchase.quantity * purchase.unitPrice).toFixed(2)}
-              //   </p>
-              //   <p>
-              //     <strong>Status:</strong>{" "}
-              //     <span
-              //       className={`${
-              //         purchase.status === "Incoming"
-              //           ? "green-text"
-              //           : purchase.status === "Returned"
-              //           ? "red-text"
-              //           : ""
-              //       }`}
-              //     >
-              //       {purchase.status}
-              //     </span>
-              //   </p>
-              // </div>
+              </div>    
             ))}
           </div>
         </div>
