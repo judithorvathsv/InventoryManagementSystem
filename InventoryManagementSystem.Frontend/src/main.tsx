@@ -9,6 +9,7 @@ import Login from './components/login';
 import Products from './components/products';
 import PurchaseForm from './components/purchaseForm';
 import Purchases from './components/purchases';
+import Inventory from './components/inventory';
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,11 @@ const router = createBrowserRouter([
       {
         path: "purchases",
         element: <Purchases/>
+      },
+      {
+        path: "inventory",
+        element: <Inventory/>
       }
-
       
     ],
   },

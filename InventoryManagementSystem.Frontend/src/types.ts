@@ -40,5 +40,7 @@ export type PurchaseSummary = {
   totalQuantity: number;
   suppliers: Set<string>;
   totalQuantityPending:number;  
+  unitPrice?:number;
+  fullTotal?:number
 }
 
