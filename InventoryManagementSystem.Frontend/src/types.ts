@@ -15,7 +15,7 @@ export type CategoryProps = {
 export type ProductDatabaseProps = {
   id:number,
   productName: string;
-  supplierName: string;
+  suppliersList: string;
   purchaseDate: string;
   quantity: number;
   unitPrice: number;

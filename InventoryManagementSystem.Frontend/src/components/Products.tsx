@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { ProductDatabaseProps, PurchaseProps, PurchaseSummary } from "../types";
 import { fetchProducts } from "../utils/fetchProduct";
 import { Link } from "react-router-dom";
@@ -8,6 +8,12 @@ const Products = () => {
   const [products, setProducts] = useState<ProductDatabaseProps[] | []>([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [purchases, setPurchases] = useState<PurchaseProps[] | []>([]);
+
+  const [showPurchaseForm, setShowPurchaseForm] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductDatabaseProps | null>(null);
+  const [quantity, setQuantity] = useState<number>(0);
+
+  const [useProductFormVisible, setUseProductFormVisible] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -27,6 +33,7 @@ const Products = () => {
         setErrorMessage(errorMessage);
       } else if (isMounted) {
         setPurchases(result || []);
+      
       }
     };
 
@@ -74,23 +81,126 @@ const Products = () => {
     };
   });
 
-  const handleBuyAgain = (productId: number) => {  
-    console.log(`Buying again for product ID: ${productId}`);
+  const handleBuyAgain = (product: ProductDatabaseProps) => {
+    setSelectedProduct(product);
+    setShowPurchaseForm(true);
   };
-  
+
+  const handleCancelPurchase = () => {
+    setShowPurchaseForm(false);
+    setSelectedProduct(null);
+    setQuantity(0); 
+  };
+
+  const handleSubmitPurchase = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!selectedProduct) return;
+
+    const supplierName = selectedProduct.suppliersList
+    && selectedProduct.suppliersList.includes(",") 
+    ? selectedProduct.suppliersList.split(", ")[0] 
+    : selectedProduct.suppliersList
+    || "";
+
+    const purchaseData = {
+      productName: selectedProduct.productName,
+      categoryId: selectedProduct.categoryId,
+      supplierName: supplierName,
+      unitPrice: selectedProduct.unitPrice || 0, 
+      quantity,
+      purchaseDate: new Date().toISOString() 
+    };
+
+    try {
+      const response = await fetch("http://localhost:5036/api/v1/products/purchase", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(purchaseData)
+      });
+
+      if (!response.ok) throw new Error("Failed to create purchase");
+
+      console.log("Purchase created successfully");     
+      handleCancelPurchase();   
+      window.location.reload();
+    } catch (error) {
+      console.error("Error creating purchase:", error);
+      setErrorMessage("Failed to create purchase");
+    }
+  };
+
+
   const handleUseProduct = (productId: number) => {
-    console.log(`Using product with ID: ${productId}`);
-  };
+    console.log(productId);
+    setUseProductFormVisible(true);
+  }
+
+
+const handleSubmitUseProduct = (e: FormEvent<HTMLFormElement>) => {
+  setErrorMessage("This function is not ready, click on cancel")
+  e.preventDefault();
+}
+
+
+const handleCancelUseProduct = () => {
+  setUseProductFormVisible(false);
+};  
+
 
   return (
     <div className="flex flex-col items-center w-full p-4">
-      <h2 className="mb-4 text-center title">All Products</h2>
+      <h2 className="mb-4 text-center title bold-title">All Products</h2>
 
-      <Link className="blue-button all-button self-end mb-4" to={"/newpurchase"}>
+      <Link className="blue-button all-button mb-4 text-center md:self-end" to={"/newpurchase"}>
       New Purchase
       </Link>
 
-      {errorMessage && <div className="text-center">{errorMessage}</div>}
+      {errorMessage && <div className="text-center red-text">{errorMessage}</div>}
+
+
+
+      {showPurchaseForm && selectedProduct && (
+        <form onSubmit={handleSubmitPurchase} className="mb-8 p-4 border border-gray-300 rounded-lg flex flex-col items-center">
+          <label>
+            Quantity:
+            <input 
+              type="number" 
+              value={quantity} 
+              onChange={(e) => setQuantity(Number(e.target.value))} 
+              required 
+              min="1"
+              className="ml-2 border border-gray-300 p-1"
+            />
+          </label>
+          <div className="mt-4">
+            <button type="submit" className="blue-button all-button mr-2">Save</button>
+            <button type="button" onClick={handleCancelPurchase} className="blue-button all-button">Cancel</button>
+          </div>
+        </form>
+      )}
+
+{useProductFormVisible &&  (
+    <form onSubmit={handleSubmitUseProduct} className="mb-8 p-4 border border-gray-300 rounded-lg flex flex-col items-center">
+        <label>
+            Quantity:
+            <input 
+                type="number" 
+                value={quantity} 
+                onChange={(e) => setQuantity(Number(e.target.value))} 
+                required 
+                min="1"
+                className="ml-2 border border-gray-300 p-1"
+            />
+        </label>
+        <div className="mt-4">
+            <button type="submit" className="blue-button all-button mr-2">Deduct</button>
+            <button type="button" onClick={handleCancelUseProduct} className="blue-button all-button">Cancel</button>
+        </div>
+        {errorMessage && <p className="red-text">{errorMessage}</p>} 
+    </form>
+)}
+
 
       {processedProducts.length > 0 ? (
     <div className="overflow-x-auto w-full">
@@ -116,12 +226,12 @@ const Products = () => {
             <td className="border border-gray-300 p-2">{product.totalQuantityPending}</td>
             <td className="border border-gray-300 p-2">{product.suppliersList }</td>
             <td className="border border-gray-300 p-2">
-              <button onClick={() => handleBuyAgain(product.id)} className="blue-button all-button">
+              <button onClick={() => handleBuyAgain(product)} className="blue-button all-button mr-2 mt-2">
               Purchase Again
               </button>
-              <button onClick={() => handleUseProduct(product.id)} className="blue-button all-button ml-2">
-                Use Product
-              </button>
+              <button onClick={() => handleUseProduct(product.id)} className="green-button all-button mt-2">
+              Use Product
+            </button>
             </td>
           </tr>
         ))}
@@ -129,19 +239,19 @@ const Products = () => {
     </table>
 
     {/* --- Mobile View --- */}
-    <div className="block md:hidden">
+    <div className="block md:hidden ">
       {processedProducts.map((product) => (
-        <div key={product.id} className="border-b border-gray-300 mb-4 p-4">
-          <h3 className="font-bold">{product.productName}</h3>
+        <div key={product.id} className="border border-gray-300 mb-4 p-4">
+          <h3 className="font-bold medium-title">{product.productName}</h3>
           <p><strong>Category:</strong> {product.categoryName}</p>
-          <p><strong>Quantity:</strong> {product.totalQuantity}</p>
-          <p><strong>Quantity:</strong> {product.totalQuantityPending}</p>
+          <p><strong>In Stock:</strong> {product.totalQuantity}</p>
+          <p><strong>Pending orders:</strong> {product.totalQuantityPending}</p>
           <p><strong>Supplier:</strong> {product.suppliersList }</p>
-          <div className="mt-2">
-            <button onClick={() => handleBuyAgain(product.id)} className="blue-button all-button mr-2">
+          <div className="">
+            <button onClick={() => handleBuyAgain(product)} className="blue-button all-button mr-2 mt-2">
               Purchase Again
-            </button>
-            <button onClick={() => handleUseProduct(product.id)} className="blue-button all-button">
+            </button>            
+            <button onClick={() => handleUseProduct(product.id)} className="green-button all-button mt-2">
               Use Product
             </button>
           </div>

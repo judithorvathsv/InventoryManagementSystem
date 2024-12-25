@@ -14,11 +14,18 @@
 
   --medium-blue: #3b82f6; 
   --dark-blue: #2563eb; 
+  --medium-green: #00b200;
+  --dark-green: #009900;
+
+  --medium-red: #f56565;
+
+  --light-grey: #E5E7EB;
 
   --button-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
 
   --title-font-size:1.7rem;
-  --medium-title-font-size:1rem;
+  --medium-title-font-size:1.4rem;
+  --under-title-font-size: 1rem
 
 }
 
@@ -43,12 +50,21 @@
 .blue-button {
   background-color: var(--medium-blue);
   color: white; 
-  transition: background-color 0.2s ease-in-out;   
- 
+  transition: background-color 0.2s ease-in-out;    
+}
+
+.green-button{
+  background-color: var(--medium-green);
+  color: white; 
+  transition: background-color 0.2s ease-in-out;    
 }
 
 .blue-button:hover {
   background-color: var(--dark-blue);
+}
+
+.green-button:hover {
+  background-color: var(--dark-green);
 }
 
 .title{
@@ -56,10 +72,18 @@
   margin-top: 1rem;
 }
 
-.label{
-  font-size: var(--medium-title-font-size);
+.bold-title{
+  font-weight: bolder;
 }
 
+.medium-title{
+  font-size: var(--medium-title-font-size);
+  padding-bottom:1rem;
+}
+
+.label{
+  font-size: var(--under-title-font-size);
+}
 
 .font-bolder {
   font-weight: 470; 
@@ -74,10 +98,27 @@
 }
 
 th{
-  font-size: var(--medium-title-font-size);
+  font-size: var(--under-title-font-size);
   font-weight: bold; 
   color:black;
 }
+
+tr:hover {
+  background-color: var(  --light-grey); 
+}
+
+.red-text{
+  color: var(medium-red);
+}
+
+.green-text{
+  color: var(--dark-green);
+}
+
+.blue-text{
+  color: var(--dark-blue);
+}
+
 
 
 

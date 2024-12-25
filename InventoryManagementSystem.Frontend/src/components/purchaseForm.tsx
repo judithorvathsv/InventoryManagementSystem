@@ -109,8 +109,8 @@ const PurchaseForm = () => {
 
   return (
 <form onSubmit={handleSubmit} className="p-4">
-<h2 className="mb-12 text-center title">New Purchase</h2>
-  {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
+<h2 className="mb-12 text-center title bold-title">New Purchase</h2>
+  {errorMessage && <div className="red-text mb-4">{errorMessage}</div>}
 
   <div className="flex flex-col md:flex-row md:space-x-8 mb-8">
     <div className="flex-1">

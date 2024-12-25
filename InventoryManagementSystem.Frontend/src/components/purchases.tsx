@@ -27,7 +27,7 @@ const Purchases = () => {
 
   return (
     <div className="flex flex-col items-center w-full p-4">
-      <h2 className="mb-4 text-center title">All Purchases</h2>
+      <h2 className="mb-4 text-center title bold-title">All Purchases</h2>
 
       <Link className="blue-button all-button self-end mb-4" to={"/"}>
         Show cost in diagram
@@ -59,7 +59,7 @@ const Purchases = () => {
                   <td className="border border-gray-300 p-2">{purchase.quantity}</td>
                   <td className="border border-gray-300 p-2">{new Date(purchase.purchaseDate).toLocaleDateString()}</td>
                   <td className="border border-gray-300 p-2">{(purchase.quantity * purchase.unitPrice).toFixed(2)}</td>
-                  <td className={`border border-gray-300 p-2 ${purchase.status === "Incoming" ? "text-green-600" : purchase.status === "Returned" ? "text-red-500" : ""}`}>
+                  <td className={`border border-gray-300 p-2 ${purchase.status === "Incoming" ? "green-text" : purchase.status === "Returned" ? "red-text" : ""}`}>
                   {purchase.status}</td>
                 </tr>
               ))}
@@ -76,7 +76,7 @@ const Purchases = () => {
                 <p><strong>Quantity:</strong> {purchase.quantity}</p>
                 <p><strong>Purchase Date:</strong> {new Date(purchase.purchaseDate).toLocaleDateString()}</p>
                 <p><strong>Total Cost:</strong> {(purchase.quantity * purchase.unitPrice).toFixed(2)}</p>
-                <p><strong>Status:</strong> <span className={`${purchase.status === "Incoming" ? "text-green-600" : purchase.status === "Returned" ? "text-red-500" : ""}`}>
+                <p><strong>Status:</strong> <span className={`${purchase.status === "Incoming" ? "green-text" : purchase.status === "Returned" ? "red-text" : ""}`}>
                     {purchase.status}
                   </span></p>
               </div>
