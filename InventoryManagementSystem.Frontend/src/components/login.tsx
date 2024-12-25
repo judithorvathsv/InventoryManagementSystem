@@ -39,7 +39,7 @@ const Login = () => {
             />
           </div>
         </section>       
-        <Link className="mt-4 blue-button" to={"/products"}>Login</Link>
+        <Link className="mt-4 blue-button all-button" to={"/products"}>Login</Link>
       </article>
     </article>
   );

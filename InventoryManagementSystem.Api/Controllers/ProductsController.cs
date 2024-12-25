@@ -115,5 +115,20 @@ namespace InventoryManagementSystem.Api.Controllers
             return Ok(purchaseResponses);
         }
 
+        [HttpPut("purchase/{id}")]
+        public async Task<IActionResult> UpdatePurchaseStatus(int id, [FromBody] int newStatusId)
+        {
+            var purchase = await _context.Purchases.FindAsync(id);
+            if (purchase is null)
+            {
+                return NotFound();
+            }
+
+            purchase.PurchaseStatusId = newStatusId;
+            await _context.SaveChangesAsync();
+
+            return Ok(purchase);
+        }
+
     }
 }

@@ -1,41 +1,83 @@
-import { useEffect, useState } from "react";
-import { fetchPurchases } from "../utils/fetchPurchases";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+
+import { PurchaseContext } from "../context/purchaseContextProvider";
 import { PurchaseProps } from "../types";
 
 const IncomingPurchases = () => {
-  const [purchases, setPurchases] = useState<PurchaseProps[] |[]>([]);
-  const [errorMessage, setErrorMessage] = useState("");
+      const { purchases, errorMessage, updatePurchaseStatus } = useContext(PurchaseContext); 
+      const [selectedPurchase, setSelectedPurchase] = useState<PurchaseProps | null>(null);
+      const [actionType, setActionType] = useState("");
 
-  useEffect(() => {
-    let isMounted = true;
-    const getPurchases = async () => {
-      const { result, errorMessage } = await fetchPurchases();
+      const incomingPurchases = purchases.filter(purchase => purchase.purchaseStatusId === 1);
 
-      if (errorMessage) {
-        setErrorMessage(errorMessage);
-      } else if (isMounted) {
-        setPurchases(result || []); 
+      const handleReceive = (purchase:PurchaseProps) => {
+        setSelectedPurchase(purchase);
+        setActionType('receive');
       }
+
+      const handleReturn = (purchase:PurchaseProps) => {
+    setSelectedPurchase(purchase);
+        setActionType('return');
+      }
+
+      const handleCancel = () => {
+        setSelectedPurchase(null);
+        setActionType("");
     };
 
-    getPurchases();
-    return () => {
-        isMounted = false;
-      };
-  }, []);
+    const handleConfirmReceive = async () => {
+        if (selectedPurchase) {
+           await updatePurchaseStatus(selectedPurchase.id, 2);        
+            handleCancel(); 
+        }
+    };
+
+    const handleConfirmReturn = async () => {
+        if (selectedPurchase) {               
+           await updatePurchaseStatus(selectedPurchase.id, 3); 
+            handleCancel(); 
+        }
+    };
 
   return (
     <div className="flex flex-col items-center w-full p-4">
-      <h2 className="mb-4 text-center title bold-title">All Purchases</h2>
-
-      <Link className="blue-button all-button self-end mb-4" to={"/"}>
-        Show cost in diagram
-      </Link>
+      <h2 className="mb-12 text-center title bold-title">Incoming Purchases</h2>
 
       {errorMessage && <div className="text-center">{errorMessage}</div>}
 
-      {purchases.length > 0 ? (
+      {selectedPurchase && (
+                <div className="mt-4 mb-8 p-4 border rounded-lg bg-white shadow-md">
+                    {actionType === 'receive' && (
+                        <div className="flex flex-col items-center">
+                            <h3 className="medium-title bold-title">Purchase ID: {selectedPurchase.id}</h3>
+                            <p>Are you sure you have been received this purchase?</p>
+                            <div className="mt-4">
+                            <button onClick={handleConfirmReceive} className="blue-button all-button mr-2">Confirm Receive</button>
+                            <button onClick={handleCancel} className="grey-button all-button">Cancel</button>
+                            </div>
+ 
+                        </div>
+                    )}
+                    {actionType === 'return' && (
+                        <div className="flex flex-col items-center">
+                            <h3 className="medium-title bold-title">Purchase ID: {selectedPurchase.id}</h3>
+                            <p>Are you sure you want to return this purchase?</p>
+                            <div className="mt-4">
+                            <button onClick={handleConfirmReturn} className="navy-button all-button mr-2">Confirm Return</button>
+                            <button onClick={handleCancel} className="grey-button all-button">Cancel</button>
+                            </div>
+
+                        </div>
+                    )}
+                </div>
+            )}
+
+
+
+
+
+
+      {incomingPurchases.length > 0 ? (
         <div className="overflow-x-auto w-full">
           {/* --- Desktop View --- */}
           <table className="min-w-full border-collapse border border-gray-300 hidden md:table">
@@ -51,7 +93,7 @@ const IncomingPurchases = () => {
               </tr>
             </thead>
             <tbody>
-              {purchases.map((purchase) => (
+              {incomingPurchases.map((purchase) => (
                 <tr key={purchase.id}>
                   <td className="border border-gray-300 p-2">{purchase.id}</td>
                   <td className="border border-gray-300 p-2">{purchase.productName}</td>
@@ -61,6 +103,22 @@ const IncomingPurchases = () => {
                   <td className="border border-gray-300 p-2">{(purchase.quantity * purchase.unitPrice).toFixed(2)}</td>
                   <td className={`border border-gray-300 p-2 ${purchase.status === "Incoming" ? "green-text" : purchase.status === "Returned" ? "red-text" : ""}`}>
                   {purchase.status}</td>
+                  <td className="border border-gray-300 p-2 w-full md:w-48">
+                    <div className="flex flex-col md:flex-row md:space-x-2">
+                      <button
+                        onClick={() => handleReceive(purchase)}
+                        className="blue-button all-button mb-2 md:mb-0"
+                      >
+                        Receive
+                      </button>
+                      <button
+                        onClick={() => handleReturn(purchase)}
+                        className="navy-button all-button mb-2 md:mb-0"
+                      >
+                        Return
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -68,7 +126,7 @@ const IncomingPurchases = () => {
 
           {/* --- Mobile View --- */}
           <div className="block md:hidden">
-            {purchases.map((purchase) => (
+            {incomingPurchases.map((purchase) => (
               <div key={purchase.id} className="border-b border-gray-300 mb-4 p-4">
                 <h3 className="font-bold">Purchase ID: {purchase.id}</h3>
                 <p><strong>Product:</strong> {purchase.productName}</p>
@@ -79,6 +137,20 @@ const IncomingPurchases = () => {
                 <p><strong>Status:</strong> <span className={`${purchase.status === "Incoming" ? "green-text" : purchase.status === "Returned" ? "red-text" : ""}`}>
                     {purchase.status}
                   </span></p>
+                  <div className="flex flex-col md:flex-row md:space-x-2">
+                      <button
+                        onClick={() => handleReceive(purchase)}
+                        className="blue-button all-button mb-2 md:mb-0"
+                      >
+                        Receive
+                      </button>
+                      <button
+                        onClick={() => handleReturn(purchase)}
+                        className="navy-button all-button mb-2 md:mb-0"
+                      >
+                        Return
+                      </button>
+                    </div>
               </div>
             ))}
           </div>

@@ -79,7 +79,7 @@ const Inventory = () => {
 
   return (
     <div className="flex flex-col items-center w-full p-4">
-      <h2 className="mb-4 text-center title bold-title">Inventory</h2>
+      <h2 className="mb-12 text-center title bold-title">Inventory</h2>
 
       {errorMessage && (
         <div className="text-center red-text">{errorMessage}</div>
