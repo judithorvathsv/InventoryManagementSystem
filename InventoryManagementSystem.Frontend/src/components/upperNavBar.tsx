@@ -27,7 +27,7 @@ const UpperNavBar = () => {
       </div>
 
       {menuIsVisible && (
-        <div className="absolute top-full left-0 z-1">
+        <div className="absolute top-full left-0 z-100">
           <NavBar hideMobileNavBar={hideUpperNavBar} />
         </div>
       )}
