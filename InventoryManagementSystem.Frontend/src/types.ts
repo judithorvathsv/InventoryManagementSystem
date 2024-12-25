@@ -20,13 +20,15 @@ export type ProductDatabaseProps = {
   quantity: number;
   unitPrice: number;
   categoryName: string;
-  categoryId: number;
+  categoryId: number; 
 };
 
 export type PurchaseProps = {
   id: number;               
   productName: string;   
   productId: number;   
+  categoryName:string;
+  categoryId: number;
   supplierName: string;    
   quantity: number;      
   purchaseDate: string;    
@@ -36,11 +38,15 @@ export type PurchaseProps = {
   purchaseStatusId:number;   
 };
 
-export type PurchaseSummary = {
+export type PurchaseSummary = {  
+  productName?:string;
+  categoryName?:string;
+  categoryId?: number;
   totalQuantity: number;
-  suppliers: Set<string>;
+  suppliers?: Set<string>;
   totalQuantityPending:number;  
   unitPrice?:number;
-  fullTotal?:number
+  fullTotal?:number;
+  hasPendingOrders?:boolean;
 }
 

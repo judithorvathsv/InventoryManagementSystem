@@ -1,29 +1,9 @@
-import { useEffect, useState } from "react";
-import { fetchPurchases } from "../utils/fetchPurchases";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { PurchaseProps } from "../types";
+import { PurchaseContext } from "../context/purchaseContextProvider";
 
 const Purchases = () => {
-  const [purchases, setPurchases] = useState<PurchaseProps[] |[]>([]);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    let isMounted = true;
-    const getPurchases = async () => {
-      const { result, errorMessage } = await fetchPurchases();
-
-      if (errorMessage) {
-        setErrorMessage(errorMessage);
-      } else if (isMounted) {
-        setPurchases(result || []); 
-      }
-    };
-
-    getPurchases();
-    return () => {
-        isMounted = false;
-      };
-  }, []);
+  const  { purchases, errorMessage }  = useContext(PurchaseContext);
 
   return (
     <div className="flex flex-col items-center w-full p-4">
@@ -54,13 +34,32 @@ const Purchases = () => {
               {purchases.map((purchase) => (
                 <tr key={purchase.id}>
                   <td className="border border-gray-300 p-2">{purchase.id}</td>
-                  <td className="border border-gray-300 p-2">{purchase.productName}</td>
-                  <td className="border border-gray-300 p-2">{purchase.supplierName}</td>
-                  <td className="border border-gray-300 p-2">{purchase.quantity}</td>
-                  <td className="border border-gray-300 p-2">{new Date(purchase.purchaseDate).toLocaleDateString()}</td>
-                  <td className="border border-gray-300 p-2">{(purchase.quantity * purchase.unitPrice).toFixed(2)}</td>
-                  <td className={`border border-gray-300 p-2 ${purchase.status === "Incoming" ? "green-text" : purchase.status === "Returned" ? "red-text" : ""}`}>
-                  {purchase.status}</td>
+                  <td className="border border-gray-300 p-2">
+                    {purchase.productName}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {purchase.supplierName}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {purchase.quantity}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {new Date(purchase.purchaseDate).toLocaleDateString()}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {(purchase.quantity * purchase.unitPrice).toFixed(2)}
+                  </td>
+                  <td
+                    className={`border border-gray-300 p-2 ${
+                      purchase.status === "Incoming"
+                        ? "green-text"
+                        : purchase.status === "Returned"
+                        ? "red-text"
+                        : ""
+                    }`}
+                  >
+                    {purchase.status}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -69,27 +68,53 @@ const Purchases = () => {
           {/* --- Mobile View --- */}
           <div className="block md:hidden">
             {purchases.map((purchase) => (
-              <div key={purchase.id} className="border-b border-gray-300 mb-4 p-4">
+              <div
+                key={purchase.id}
+                className="border-b border-gray-300 mb-4 p-4"
+              >
                 <h3 className="font-bold">Purchase ID: {purchase.id}</h3>
-                <p><strong>Product:</strong> {purchase.productName}</p>
-                <p><strong>Supplier:</strong> {purchase.supplierName}</p>
-                <p><strong>Quantity:</strong> {purchase.quantity}</p>
-                <p><strong>Purchase Date:</strong> {new Date(purchase.purchaseDate).toLocaleDateString()}</p>
-                <p><strong>Total Cost:</strong> {(purchase.quantity * purchase.unitPrice).toFixed(2)}</p>
-                <p><strong>Status:</strong> <span className={`${purchase.status === "Incoming" ? "green-text" : purchase.status === "Returned" ? "red-text" : ""}`}>
+                <p>
+                  <strong>Product:</strong> {purchase.productName}
+                </p>
+                <p>
+                  <strong>Supplier:</strong> {purchase.supplierName}
+                </p>
+                <p>
+                  <strong>Quantity:</strong> {purchase.quantity}
+                </p>
+                <p>
+                  <strong>Purchase Date:</strong>{" "}
+                  {new Date(purchase.purchaseDate).toLocaleDateString()}
+                </p>
+                <p>
+                  <strong>Total Cost:</strong>{" "}
+                  {(purchase.quantity * purchase.unitPrice).toFixed(2)}
+                </p>
+                <p>
+                  <strong>Status:</strong>{" "}
+                  <span
+                    className={`${
+                      purchase.status === "Incoming"
+                        ? "green-text"
+                        : purchase.status === "Returned"
+                        ? "red-text"
+                        : ""
+                    }`}
+                  >
                     {purchase.status}
-                  </span></p>
+                  </span>
+                </p>
               </div>
             ))}
           </div>
-
         </div>
       ) : (
-        <p className="text-center w-full p-4">No purchases have been made yet.</p>
+        <p className="text-center w-full p-4">
+          No purchases have been made yet.
+        </p>
       )}
     </div>
   );
 };
 
 export default Purchases;
-

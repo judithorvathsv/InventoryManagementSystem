@@ -49,27 +49,24 @@ const Inventory = () => {
       if (!purchaseSummary[productId]) {
         purchaseSummary[productId] = {
           totalQuantity: 0,
-          totalQuantityPending: 0,
-          suppliers: new Set(),
-          unitPrice: 0,
+          totalQuantityPending: 0,     
+          unitPrice: purchase.unitPrice,
           fullTotal: 0
         };
       }   
       
       if (purchase.purchaseStatusId === 2) {
-        purchaseSummary[productId].totalQuantity += purchase.quantity;
-        purchaseSummary[productId].suppliers.add(purchase.supplierName);
+        purchaseSummary[productId].totalQuantity += purchase.quantity;   
       }  
 
      else if (purchase.purchaseStatusId === 1) {
-        purchaseSummary[productId].totalQuantityPending += purchase.quantity;
+        purchaseSummary[productId].totalQuantityPending += purchase.quantity; 
       }
     
   });
 
   const processedProducts = products.map(product => {
     const summary = purchaseSummary[product.id] || { totalQuantity: 0, totalQuantityPending: 0, suppliers: new Set() };
-    const unitPrice = summary.unitPrice || 0;
     const totalValue =  summary.totalQuantity * summary.unitPrice!;
     const fullTotal = summary.totalQuantity + summary.totalQuantityPending;
 
@@ -77,7 +74,7 @@ const Inventory = () => {
       ...product,
       totalQuantity: summary.totalQuantity,
       totalQuantityPending: summary.totalQuantityPending,     
-      unitPrice,
+      unitPrice: summary.unitPrice,
       totalValue,
       fullTotal  
     };
@@ -111,7 +108,7 @@ const Inventory = () => {
         {processedProducts.map((product) => (
           <tr key={product.id}>
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.productName}</td>
-            <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.categoryName || ""}</td>
+            <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.categoryName || 'N/A'}</td>
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.totalQuantity}</td>
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.totalQuantityPending}</td>
             <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">{product.fullTotal}</td>  
@@ -151,7 +148,8 @@ const Inventory = () => {
     <div className="flex items-center mb-2">
         <label className="font-bold w-1/3">Total Value in Stock:</label>
         <p className="font-bold w-2/3">{product.totalValue} sek</p>
-    </div> 
+    </div>
+
 
         </div>
       ))}

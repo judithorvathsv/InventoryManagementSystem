@@ -20,6 +20,11 @@
   --medium-red: #f56565;
 
   --light-grey: #E5E7EB;
+  /* --light-grey: #BFBFBF; */  
+  --dark-grey: #a7a7a7;
+
+  --light-navy:#002244;
+  --dark-navy:#000000;
 
   --button-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
 
@@ -53,18 +58,35 @@
   transition: background-color 0.2s ease-in-out;    
 }
 
+.blue-button:hover {
+  background-color: var(--dark-blue);
+}
+
 .green-button{
   background-color: var(--medium-green);
   color: white; 
   transition: background-color 0.2s ease-in-out;    
 }
 
-.blue-button:hover {
-  background-color: var(--dark-blue);
-}
-
 .green-button:hover {
   background-color: var(--dark-green);
+}
+
+.grey-button{
+  background-color: var(--light-grey);
+}
+
+.grey-button:hover{
+  background-color: var(--dark-grey);
+}
+
+.navy-button{
+  background-color: var(--light-navy);
+  color:white;  
+}
+
+.navy-button:hover{
+  background-color: var(--dark-navy);
 }
 
 .title{

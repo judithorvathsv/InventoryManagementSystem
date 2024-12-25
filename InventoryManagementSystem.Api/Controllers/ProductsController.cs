@@ -106,10 +106,11 @@ namespace InventoryManagementSystem.Api.Controllers
         [HttpGet("purchases")]
         public ActionResult<List<Purchase>> GetPurchases()
         {
-                var purchases = _context.Purchases
-                    .Include(p => p.Product) 
-                    .Include(p => p.PurchaseStatus) 
-                    .ToList();
+            var purchases = _context.Purchases
+                .Include(p => p.Product)
+                 .ThenInclude(p => p.Category)
+                .Include(p => p.PurchaseStatus)
+                .ToList();
             var purchaseResponses = purchases.Select(p => p.ToResponse()).ToList();
             return Ok(purchaseResponses);
         }

@@ -1,15 +1,17 @@
-import './index.css'
+import "./index.css";
 
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from './App';
-import Login from './components/login';
-import Products from './components/products';
-import PurchaseForm from './components/purchaseForm';
-import Purchases from './components/purchases';
-import Inventory from './components/inventory';
+import App from "./App";
+import Login from "./components/login";
+import Products from "./components/products";
+import PurchaseForm from "./components/purchaseForm";
+import Purchases from "./components/purchases";
+import Inventory from "./components/inventory";
+import IncomingPurchases from "./components/incomingPurchases";
+import { PurchaseContextProvider } from "./context/purchaseContextProvider";
 
 const router = createBrowserRouter([
   {
@@ -17,36 +19,41 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        index: true, 
+        index: true,
         element: <Login />,
       },
       {
-        path: "login", 
+        path: "login",
         element: <Login />,
       },
       {
-        path: "products", 
+        path: "products",
         element: <Products />,
       },
       {
-        path: "newpurchase", 
+        path: "newpurchase",
         element: <PurchaseForm />,
       },
       {
         path: "purchases",
-        element: <Purchases/>
+        element: <Purchases />,
       },
       {
         path: "inventory",
-        element: <Inventory/>
-      }
-      
+        element: <Inventory />,
+      },
+      {
+        path: "incoming-purchases",
+        element: <IncomingPurchases />,
+      },
     ],
   },
 ]);
 
-createRoot(document.getElementById('root')!).render(
-   <React.StrictMode>    
-        <RouterProvider router={router} />       
-   </React.StrictMode>
-)
+createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <PurchaseContextProvider>
+      <RouterProvider router={router} />
+    </PurchaseContextProvider>
+  </React.StrictMode>
+);

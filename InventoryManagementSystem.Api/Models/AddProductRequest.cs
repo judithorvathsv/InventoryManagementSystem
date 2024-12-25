@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Api.Models
 {
@@ -12,6 +8,6 @@ namespace InventoryManagementSystem.Api.Models
         public string PurchaseDate { get; set; }
         public double Quantity { get; set; }
         public double UnitPrice { get; set; }
-        public int CategoryId { get; set; }
+        public int CategoryId { get; set; }  
     }
 }

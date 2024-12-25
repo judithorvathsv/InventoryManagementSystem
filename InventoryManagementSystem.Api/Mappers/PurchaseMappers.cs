@@ -16,7 +16,9 @@ namespace InventoryManagementSystem.Api.Mappers
                 UnitPrice = purchase.UnitPrice,
                 PurchaseDate = purchase.PurchaseDate,
                 PurchaseStatusId = purchase.PurchaseStatusId,
-                Status = purchase.PurchaseStatus.Name
+                Status = purchase.PurchaseStatus.Name,
+                CategoryName = purchase.Product.Category != null ? purchase.Product.Category.Name : "N/A",
+                CategoryId = purchase.Product.CategoryId
             };
         }
     }
