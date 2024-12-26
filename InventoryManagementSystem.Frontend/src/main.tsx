@@ -11,7 +11,9 @@ import PurchaseForm from "./components/purchaseForm";
 import Purchases from "./components/purchases";
 import Inventory from "./components/inventory";
 import IncomingPurchases from "./components/incomingPurchases";
-import { PurchaseContextProvider } from "./context/purchaseContextProvider";
+import { PurchaseContextProvider } from "./context/PurchaseContextProvider";
+import OrderForm from "./components/orderForm";
+import Orders from "./components/orders";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: "incoming-purchases",
         element: <IncomingPurchases />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
+      },
+      {
+        path: "neworder",
+        element: <OrderForm />,
       },
     ],
   },

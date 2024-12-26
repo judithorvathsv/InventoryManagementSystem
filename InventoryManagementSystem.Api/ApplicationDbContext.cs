@@ -13,6 +13,8 @@ namespace InventoryManagementSystem.Api
         public DbSet<Category> Categories { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<PurchaseStatus> PurchaseStatuses { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
 
         public static void SeedCategories(ModelBuilder modelBuilder)
         {
@@ -25,6 +27,12 @@ namespace InventoryManagementSystem.Api
                 new PurchaseStatus { Id = 1, Name = "Incoming" },
                 new PurchaseStatus { Id = 2, Name = "Completed" },
                 new PurchaseStatus { Id = 3, Name = "Returned" } 
+            );
+
+            modelBuilder.Entity<OrderStatus>().HasData(
+                new OrderStatus { Id = 1, Name = "Processing" },
+                new OrderStatus { Id = 2, Name = "Delivered" },
+                new OrderStatus { Id = 3, Name = "Returned" } 
             );
         }
 
@@ -41,6 +49,11 @@ namespace InventoryManagementSystem.Api
                 .HasOne(p => p.PurchaseStatus)
                 .WithMany(ps => ps.Purchases)
                 .HasForeignKey(p => p.PurchaseStatusId);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(p => p.OrderStatus)
+                .WithMany(ps => ps.Orders)
+                .HasForeignKey(p => p.OrderStatusId);
 
             base.OnModelCreating(modelBuilder);
         }

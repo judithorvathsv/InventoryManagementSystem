@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { CategoryProps, ProductProps } from "../types";
 import { fetchCategories } from "../utils/fetchCategory";
 import { useNavigate } from "react-router-dom";
-import { PurchaseContext } from "../context/purchaseContextProvider";
+import { PurchaseContext } from "../context/PurchaseContextProvider";
 
 const PurchaseForm = () => {
   const [product, setProduct] = useState<ProductProps>({

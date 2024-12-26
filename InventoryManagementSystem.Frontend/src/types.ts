@@ -50,3 +50,13 @@ export type PurchaseSummary = {
   hasPendingOrders?:boolean;
 }
 
+export type OrderProps = {
+  productId:number;
+  productName: string;
+  customerName: string;
+  orderDate: string;
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number,
+}
+
