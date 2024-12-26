@@ -49,7 +49,9 @@ namespace InventoryManagementSystem.Api.Controllers
         public ActionResult<List<Order>> GetOrderList()
         {
             var orders = _context.Orders
-                .Include(p => p.Product)
+                .Include(o => o.OrderStatus)
+                .Include(o => o.Product)
+                 .ThenInclude(p => p.Category) 
                 .ToList();
             var orderResponses = orders.Select(p => p.ToResponse()).ToList();
             return Ok(orderResponses);
@@ -68,5 +70,57 @@ namespace InventoryManagementSystem.Api.Controllers
             await _context.SaveChangesAsync();
             return Ok(order);
         }
+
+        [HttpPut("{id}/send")]
+        public async Task<ActionResult<Order>> Send(AddOrderRequest request, int id)
+        {
+            var product = await _context.Products.FindAsync(request.ProductId);
+
+            if (product is null)
+            {
+                return BadRequest("Invalid product");
+            }
+
+            var purchases = await _context.Purchases
+                .Where(p => p.ProductId == request.ProductId && p.PurchaseStatusId == 2)
+                .ToListAsync();
+
+            double totalAvailableQuantity = purchases.Sum(p => p.Quantity);
+
+            if (totalAvailableQuantity < request.Quantity)
+            {
+                return BadRequest(new { message = "Insufficient stock to fulfill the order." });
+            }
+
+            double remainingOrderQuantity = request.Quantity;
+
+            foreach (var purchase in purchases.OrderBy(p => p.PurchaseDate))
+            {
+                if (remainingOrderQuantity <= 0) break;
+
+                if (purchase.Quantity >= remainingOrderQuantity)
+                {
+                    purchase.Quantity -= remainingOrderQuantity;
+                    remainingOrderQuantity = 0;
+                }
+                else
+                {
+                    remainingOrderQuantity -= purchase.Quantity;
+                    purchase.Quantity = 0;
+                }
+
+                _context.Purchases.Update(purchase);
+            }
+
+            var order = _context.Orders.Find(id);
+            order!.OrderStatusId = 2;
+
+            _context.Orders.Update(order);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(Get), new { id = order.Id }, order);
+        }
+
+
     }
 }

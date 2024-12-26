@@ -5,7 +5,7 @@ namespace InventoryManagementSystem.Api.Models
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
-        public string ProductName { get; set; }
+        public string ProductName { get; set; }         
         public string CustomerName { get; set; }
         public double Quantity { get; set; }
         public double UnitPrice { get; set; }
@@ -13,5 +13,6 @@ namespace InventoryManagementSystem.Api.Models
         public double TotalPrice => Quantity * UnitPrice;
         public int OrderStatusId { get; set; }
         public string Status { get; set; }
+        public string CategoryName { get; set; }        
     }
 }

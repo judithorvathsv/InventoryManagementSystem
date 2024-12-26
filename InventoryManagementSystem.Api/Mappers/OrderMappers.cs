@@ -17,6 +17,7 @@ namespace InventoryManagementSystem.Api.Mappers
                 OrderDate = order.OrderDate,
                 OrderStatusId = order.OrderStatusId,
                 Status = order.OrderStatus.Name,
+                CategoryName = order.Product?.Category?.Name,
             };
         }
 

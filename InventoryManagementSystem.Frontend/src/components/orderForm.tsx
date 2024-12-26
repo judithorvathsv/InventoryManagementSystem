@@ -1,74 +1,79 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { OrderProps, ProductDatabaseProps } from "../types";
 import { useNavigate } from "react-router-dom";
 import { fetchProducts } from "../utils/fetchProduct";
+import { OrderContext } from "../context/OrderContextProvider";
 
 const OrderForm = () => {
+  const { updateFromDatabase } = useContext(OrderContext);
   const [order, setOrder] = useState<OrderProps>({
-    productId : 0,
+    productId: 0,
     productName: "",
     customerName: "",
     orderDate: "",
     quantity: 0,
-    unitPrice: 0,   
+    unitPrice: 0,
     totalPrice: 0,
   });
 
   const [errorMessage, setErrorMessage] = useState("");
-   const [products, setProducts] = useState<ProductDatabaseProps[]>([]);
+  const [products, setProducts] = useState<ProductDatabaseProps[]>([]);
 
   const navigate = useNavigate();
 
-    useEffect(() => {
-      let isMounted = true;
-      const getProducts = async () => {
-        const { result, errorMessage } = await fetchProducts();
-  
-        if (errorMessage) {
-          setErrorMessage(errorMessage);
-        } else if (isMounted) {
-            setProducts(result || []);
-        }
-      };
-  
-      getProducts();
-  
-      return () => {
-        isMounted = false;
-      };
-    }, []);
+  useEffect(() => {
+    let isMounted = true;
+    const getProducts = async () => {
+      const { result, errorMessage } = await fetchProducts();
 
-    const handleChange = (
-        e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-      ) => {
-        const { name, value } = e.target;   
-        setOrder((prev) => {
-          const updatedValue =
-            name === "quantity" || name === "unitPrice" ? Number(value) : value;    
+      if (errorMessage) {
+        setErrorMessage(errorMessage);
+      } else if (isMounted) {
+        setProducts(result || []);
+      }
+    };
 
-          const updatedOrder = {
-            ...prev,
-            [name]: updatedValue,
-          };    
-         
-          if (updatedOrder.quantity > 0 && updatedOrder.unitPrice > 0) {
-            updatedOrder.totalPrice = updatedOrder.quantity * updatedOrder.unitPrice;
-          } else {
-            updatedOrder.totalPrice = 0; 
-          }    
-          return updatedOrder;
-        });
+    getProducts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setOrder((prev) => {
+      const updatedValue =
+        name === "quantity" || name === "unitPrice" ? Number(value) : value;
+
+      const updatedOrder = {
+        ...prev,
+        [name]: updatedValue,
       };
+
+      if (updatedOrder.quantity > 0 && updatedOrder.unitPrice > 0) {
+        updatedOrder.totalPrice =
+          updatedOrder.quantity * updatedOrder.unitPrice;
+      } else {
+        updatedOrder.totalPrice = 0;
+      }
+      return updatedOrder;
+    });
+  };
 
   const handleProductChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedProductId = Number(e.target.value);
-    const selectedProduct = products.find(product => product.id === selectedProductId);
+    const selectedProduct = products.find(
+      (product) => product.id === selectedProductId
+    );
 
     if (selectedProduct) {
       setOrder((prev) => ({
         ...prev,
         productId: selectedProductId,
-        productName: selectedProduct.productName, 
+        productName: selectedProduct.productName,
       }));
     }
   };
@@ -76,29 +81,27 @@ const OrderForm = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "http://localhost:5036/api/v1/orders",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(order),
-        }
-      );
+      const response = await fetch("http://localhost:5036/api/v1/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(order),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to create purchase");
       }
 
       setOrder({
-        productId : 0,
+        productId: 0,
         productName: "",
         customerName: "",
         orderDate: "",
         quantity: 0,
         unitPrice: 0,
-        totalPrice: 0
+        totalPrice: 0,
       });
       setErrorMessage("");
+      updateFromDatabase();
       navigate("/orders");
     } catch (error) {
       console.error("Error creating order:", error);
@@ -108,13 +111,13 @@ const OrderForm = () => {
 
   const handleCancel = () => {
     setOrder({
-        productId : 0,
-        productName: "",
-        customerName: "",
-        orderDate: "",
-        quantity: 0,
-        unitPrice: 0,
-        totalPrice: 0
+      productId: 0,
+      productName: "",
+      customerName: "",
+      orderDate: "",
+      quantity: 0,
+      unitPrice: 0,
+      totalPrice: 0,
     });
     setErrorMessage("");
     navigate("/orders");
@@ -126,7 +129,7 @@ const OrderForm = () => {
       {errorMessage && <div className="red-text mb-4">{errorMessage}</div>}
 
       <div className="flex flex-col md:flex-row md:space-x-8 mb-8">
-      <div className="flex-1">
+        <div className="flex-1">
           <label htmlFor="product" className="block text-sm font-medium">
             Product
           </label>
@@ -141,7 +144,7 @@ const OrderForm = () => {
             <option value="">Select a product</option>
             {products.map((product) => (
               <option key={product.id} value={product.id}>
-                {product.productName}
+                {product.productName} ({product.categoryName})
               </option>
             ))}
           </select>
@@ -218,8 +221,8 @@ const OrderForm = () => {
             name="totalPrice"
             value={order.totalPrice}
             onChange={handleChange}
-            className="input input-bordered w-full bg-gray-200 cursor-not-allowed" 
-            readOnly             
+            className="input input-bordered w-full bg-gray-200 cursor-not-allowed"
+            readOnly
           />
         </div>
       </div>

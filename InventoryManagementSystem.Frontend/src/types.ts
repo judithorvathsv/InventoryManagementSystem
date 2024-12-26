@@ -13,50 +13,53 @@ export type CategoryProps = {
 };
 
 export type ProductDatabaseProps = {
-  id:number,
+  id: number;
   productName: string;
   suppliersList: string;
   purchaseDate: string;
   quantity: number;
   unitPrice: number;
   categoryName: string;
-  categoryId: number; 
+  categoryId: number;
 };
 
 export type PurchaseProps = {
-  id: number;               
-  productName: string;   
-  productId: number;   
-  categoryName:string;
+  id: number;
+  productName: string;
+  productId: number;
+  categoryName: string;
   categoryId: number;
-  supplierName: string;    
-  quantity: number;      
-  purchaseDate: string;    
-  unitPrice: number;       
-  totalCost: number;       
-  status: string;   
-  purchaseStatusId:number;   
+  supplierName: string;
+  quantity: number;
+  purchaseDate: string;
+  unitPrice: number;
+  totalCost: number;
+  status: string;
+  purchaseStatusId: number;
 };
 
-export type PurchaseSummary = {  
-  productName?:string;
-  categoryName?:string;
+export type PurchaseSummary = {
+  productName?: string;
+  categoryName?: string;
   categoryId?: number;
   totalQuantity: number;
   suppliers?: Set<string>;
-  totalQuantityPending:number;  
-  unitPrice?:number;
-  fullTotal?:number;
-  hasPendingOrders?:boolean;
-}
+  totalQuantityPending: number;
+  unitPrice?: number;
+  fullTotal?: number;
+  hasPendingOrders?: boolean;
+};
 
 export type OrderProps = {
-  productId:number;
+  id?: number;
+  productId: number;
   productName: string;
   customerName: string;
   orderDate: string;
   quantity: number;
   unitPrice: number;
-  totalPrice: number,
-}
-
+  totalPrice: number;
+  status?: string;
+  orderStatusId?: number;
+  categoryName?: string;
+};

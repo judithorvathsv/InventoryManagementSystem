@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 :root {
-  font-family: "Roboto", serif;
+  /* font-family: "Roboto", serif; */
+  font-family: "Lato", serif;
+  /* font-family: "Tinos", serif; */
+  /* font-family: "Noto Serif", serif; */
+
   line-height: 1.5;
   font-weight: 400;
 
@@ -18,9 +22,11 @@
   --dark-green: #009900;
 
   --medium-red: #f56565;
+  --light-red:#ff0000;
+  --dark-red:#8B0000;
 
   --light-grey: #E5E7EB;
-  /* --light-grey: #BFBFBF; */  
+   --medium-grey: #BFBFBF; 
   --dark-grey: #a7a7a7;
 
   --light-navy:#002244;
@@ -74,14 +80,25 @@
 
 .grey-button{
   background-color: var(--light-grey);
+  border:1px solid var(--medium-grey);
 }
 
 .grey-button:hover{
   background-color: var(--dark-grey);
+  color:white;
 }
 
 .navy-button{
   background-color: var(--light-navy);
+  color:white;  
+}
+
+.red-button:hover{
+  background-color: var(--dark-red);
+}
+
+.red-button{
+  background-color: var(--light-red);
   color:white;  
 }
 
@@ -92,6 +109,11 @@
 .title{
   font-size: var(--title-font-size);
   margin-top: 1rem;
+}
+
+#main-title{
+  font-weight: bolder;
+  font-size: 2rem;
 }
 
 .bold-title{
@@ -139,6 +161,10 @@ tr:hover {
 
 .blue-text{
   color: var(--dark-blue);
+}
+
+.red-text{
+  color: var(--light-red);
 }
 
 

@@ -44,18 +44,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
             All Purchases
           </NavLink>
         </li>
-        <li onClick={hideMobileNavBar}>
-          <NavLink
-            to="/inventory"
-            className={({ isActive }) =>
-              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
-                isActive ? "active-link font-bolder text-lg" : "text-black"
-              }`
-            }
-          >
-            Inventory
-          </NavLink>
-        </li>
+
         <li onClick={hideMobileNavBar}>
           <NavLink
             to="/incoming-purchases"
@@ -68,18 +57,20 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
             Incoming Purchases
           </NavLink>
         </li>
+
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/orders"
+            to="/inventory"
             className={({ isActive }) =>
               `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
               }`
             }
           >
-            Outgoing Orders
+            Inventory
           </NavLink>
         </li>
+
         <li onClick={hideMobileNavBar}>
           <NavLink
             to="/neworder"
@@ -92,6 +83,36 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
             New Order
           </NavLink>
         </li>
+
+
+        <li onClick={hideMobileNavBar}>
+          <NavLink
+            to="/orders"
+            className={({ isActive }) =>
+              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+                isActive ? "active-link font-bolder text-lg" : "text-black"
+              }`
+            }
+          >
+            All Orders
+          </NavLink>
+        </li>
+
+        <li onClick={hideMobileNavBar}>
+          <NavLink
+            to="/outgoing-orders"
+            className={({ isActive }) =>
+              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+                isActive ? "active-link font-bolder text-lg" : "text-black"
+              }`
+            }
+          >
+            Outgoing Orders
+          </NavLink>
+        </li>
+
+
+
       </ul>
     </aside>
   );

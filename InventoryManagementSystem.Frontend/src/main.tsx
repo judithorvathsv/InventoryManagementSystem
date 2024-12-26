@@ -14,6 +14,8 @@ import IncomingPurchases from "./components/incomingPurchases";
 import { PurchaseContextProvider } from "./context/PurchaseContextProvider";
 import OrderForm from "./components/orderForm";
 import Orders from "./components/orders";
+import { OrderContextProvider } from "./context/OrderContextProvider";
+import OutgoingOrders from "./components/outgoingOrders";
 
 const router = createBrowserRouter([
   {
@@ -49,12 +51,16 @@ const router = createBrowserRouter([
         element: <IncomingPurchases />,
       },
       {
+        path: "neworder",
+        element: <OrderForm />,
+      },
+      {
         path: "orders",
         element: <Orders />,
       },
       {
-        path: "neworder",
-        element: <OrderForm />,
+        path: "outgoing-orders",
+        element: <OutgoingOrders />,
       },
     ],
   },
@@ -63,7 +69,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <PurchaseContextProvider>
-      <RouterProvider router={router} />
+      <OrderContextProvider>
+        <RouterProvider router={router} />
+      </OrderContextProvider>
     </PurchaseContextProvider>
   </React.StrictMode>
 );

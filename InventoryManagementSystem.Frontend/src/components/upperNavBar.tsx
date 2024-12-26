@@ -21,7 +21,7 @@ const UpperNavBar = () => {
           onClick={showNavBar}
           className="w-[2rem] cursor-pointer lg:hidden"
         />
-        <h1 className="title text-center flex-grow pb-2">
+        <h1 className="title text-center flex-grow pb-2" id="main-title">
           Inventory Management System
         </h1>
       </div>
