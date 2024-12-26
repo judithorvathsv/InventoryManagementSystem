@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { PurchaseContext } from "../context/purchaseContextProvider";
+import { PurchaseContext } from "../context/PurchaseContextProvider";
 
 const Purchases = () => {
   const { purchases, errorMessage } = useContext(PurchaseContext);
@@ -21,7 +21,7 @@ const Purchases = () => {
       {purchases.length > 0 ? (
         <div className="overflow-x-auto w-full">
           {/* --- Desktop View --- */}
-          <table className="min-w-full border-collapse border border-gray-300 hidden md:table">
+          <table className="min-w-full border-collapse border border-gray-300 hidden lg:table">
             <thead>
               <tr>
                 <th className="border border-gray-300 p-2">Purchase ID</th>
@@ -69,7 +69,7 @@ const Purchases = () => {
           </table>
 
           {/* --- Mobile View --- */}
-          <div className="block md:hidden">
+          <div className="block lg:hidden">
             {purchases.map((purchase) => (
               <div
                 key={purchase.id}
@@ -121,7 +121,7 @@ const Purchases = () => {
                     {purchase.status}
                   </p>
                 </div>
-              </div>    
+              </div>
             ))}
           </div>
         </div>

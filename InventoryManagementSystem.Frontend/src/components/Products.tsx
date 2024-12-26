@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useState } from "react";
 import { ProductDatabaseProps, PurchaseSummary } from "../types";
 import { Link } from "react-router-dom";
-import { PurchaseContext } from "../context/purchaseContextProvider";
+import { PurchaseContext } from "../context/PurchaseContextProvider";
 
 const Products = () => {
   const { purchases, errorMessage } = useContext(PurchaseContext);
@@ -53,6 +53,10 @@ const Products = () => {
   );
 
   const handleBuyAgain = (productId: number) => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     const lastPurchase = purchases
       .filter((p) => p.productId === productId)
       .sort(
@@ -126,6 +130,10 @@ const Products = () => {
   };
 
   const handleUseProduct = (productId: number) => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     console.log(productId);
     setUseProductFormVisible(true);
   };
@@ -266,13 +274,15 @@ const Products = () => {
       {processedProducts.length > 0 ? (
         <div className="overflow-x-auto w-full">
           {/* --- Desktop View --- */}
-          <table className="min-w-full border-collapse border border-gray-300 hidden md:table">
+          <table className="min-w-full border-collapse border border-gray-300 hidden lg:table">
             <thead>
               <tr>
                 <th className="border border-gray-300 p-2">Product Name</th>
                 <th className="border border-gray-300 p-2">Category</th>
                 <th className="border border-gray-300 p-2">In stock (kg)</th>
-                <th className="border border-gray-300 p-2">Pending orders (kg)</th>
+                <th className="border border-gray-300 p-2">
+                  Pending orders (kg)
+                </th>
                 <th className="border border-gray-300 p-2">Supplier Name(s)</th>
                 <th className="border border-gray-300 p-2">Actions</th>
               </tr>
@@ -280,23 +290,23 @@ const Products = () => {
             <tbody>
               {processedProducts.map((product) => (
                 <tr key={product.id}>
-                  <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">
+                  <td className="border border-gray-300 p-2 w-1/7 whitespace-normal">
                     {product.productName}
                   </td>
-                  <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">
+                  <td className="border border-gray-300 p-2 w-1/7 whitespace-normal">
                     {product.categoryName || "N/A"}
                   </td>
-                  <td className="border border-gray-300 p-2 w-1/6 whitespace-normal">
+                  <td className="border border-gray-300 p-2 w-1/7 whitespace-normal">
                     {product.totalQuantity}
                   </td>
-                  <td className="border border-gray-300 p-2 w-1/6 whitespace-normal green-text">
+                  <td className="border border-gray-300 p-2 w-1/7 whitespace-normal green-text">
                     {product.totalQuantityPending}
                   </td>
-                  <td className="border border-gray-300 p-2 w-1/6 whitespace-normal ">
+                  <td className="border border-gray-300 p-2 w-1/7 whitespace-normal ">
                     {product.suppliersList}
                   </td>
 
-                  <td className="border border-gray-300 p-2 w-full md:w-48">
+                  <td className="border border-gray-300 p-2 w-2/7">
                     <div className="flex flex-col md:flex-row md:space-x-2">
                       <button
                         onClick={() => handleBuyAgain(product.id)}
@@ -318,7 +328,7 @@ const Products = () => {
           </table>
 
           {/* --- Mobile View --- */}
-          <div className="block md:hidden ">
+          <div className="block lg:hidden ">
             {processedProducts.map((product) => (
               <div key={product.id} className="border border-gray-300 mb-4 p-4">
                 <h3 className="font-bold medium-title">
@@ -326,23 +336,25 @@ const Products = () => {
                 </h3>
 
                 <div className="flex items-center mb-2">
-                  <label className="font-bold w-1/3">Category:</label>
-                  <p className="w-2/3">{product.categoryName}</p>
+                  <label className="font-bold w-1/3 mr-2">Category:</label>
+                  <p>{product.categoryName}</p>
                 </div>
                 <div className="flex items-center mb-2">
-                  <label className="font-bold w-1/3">In Stock:</label>
-                  <p className="w-2/3">{product.totalQuantity} kg</p>
+                  <label className="font-bold w-1/3 mr-2">In Stock:</label>
+                  <p>{product.totalQuantity} kg</p>
                 </div>
                 <div className="flex items-center mb-2">
-                  <label className="font-bold w-1/3">Pending orders:</label>
-                  <p className="w-2/3 green-text">
+                  <label className="font-bold w-1/3 mr-2">
+                    Pending orders:
+                  </label>
+                  <p className="green-text">
                     {product.totalQuantityPending} kg
                   </p>
                 </div>
 
                 <div className="flex items-center mb-2">
-                  <label className="font-bold w-1/3">Supplier(s):</label>
-                  <p className="w-2/3">{product.suppliersList}</p>
+                  <label className="font-bold w-1/3 mr-2">Supplier(s):</label>
+                  <p>{product.suppliersList}</p>
                 </div>
 
                 <div className="flex items-center mb-2">

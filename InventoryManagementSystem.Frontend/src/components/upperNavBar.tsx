@@ -13,7 +13,7 @@ const UpperNavBar = () => {
   };
 
   return (
-    <div className="flex flex-col bg-gray-200 p-2 relative">
+    <div className="flex flex-col bg-gray-200 p-2 sticky top-0 z-50">
       <div className="flex items-center justify-between">
         <img
           src={menu}

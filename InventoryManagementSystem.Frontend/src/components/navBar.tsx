@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
   return (
-    <aside className="flex flex-col w-52 bg-gray-200 p-4 h-full relative  z-50 ">
+    <aside className="flex flex-col w-52 bg-gray-200 p-4 h-full relative z-50 ">
       <h2 className="title mb-4 font-bolder">Menu</h2>
 
       <ul className="flex flex-col space-y-4">
