@@ -218,8 +218,8 @@ const OrderForm = () => {
             name="totalPrice"
             value={order.totalPrice}
             onChange={handleChange}
-            className="input input-bordered w-full"
-            required
+            className="input input-bordered w-full bg-gray-200 cursor-not-allowed" 
+            readOnly             
           />
         </div>
       </div>
