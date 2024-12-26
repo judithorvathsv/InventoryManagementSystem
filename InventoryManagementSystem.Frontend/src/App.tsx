@@ -11,7 +11,8 @@ function App() {
   return (
     <div className={isLogin ? "" : "flex h-full"}>
       {!isLogin && (
-        <div className="hidden lg:block bg-gray-200 pt-20 z-50 h-screen">
+        <div className="hidden lg:block z-50 h-screen">
+          <div className="sideNavBar"></div>
           <NavBar hideMobileNavBar={hideMobileNavBar} />
         </div>
       )}

@@ -90,7 +90,7 @@
 
 .navy-button{
   background-color: var(--light-navy);
-  color:white;  
+  color:#ffffff;  
 }
 
 .red-button:hover{
@@ -99,7 +99,7 @@
 
 .red-button{
   background-color: var(--light-red);
-  color:white;  
+  color:#ffffff; 
 }
 
 .navy-button:hover{
@@ -109,11 +109,13 @@
 .title{
   font-size: var(--title-font-size);
   margin-top: 1rem;
+  color:#000000;
 }
 
 #main-title{
   font-weight: bolder;
   font-size: 2rem;
+  color:#ffffff; 
 }
 
 .bold-title{
@@ -167,6 +169,12 @@ tr:hover {
   color: var(--light-red);
 }
 
+.sideNavBar{
+  background-color: var(--light-navy);
+  padding-top: 5.5rem;
+  opacity: 1;
+  z-index:50;
+}
 
 
 

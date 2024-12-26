@@ -16,6 +16,7 @@ import OrderForm from "./components/orderForm";
 import Orders from "./components/orders";
 import { OrderContextProvider } from "./context/OrderContextProvider";
 import OutgoingOrders from "./components/outgoingOrders";
+import LineChartComponent from "./components/lineChart";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "outgoing-orders",
         element: <OutgoingOrders />,
+      },
+      {
+        path: "linechart",
+        element: <LineChartComponent />,
       },
     ],
   },

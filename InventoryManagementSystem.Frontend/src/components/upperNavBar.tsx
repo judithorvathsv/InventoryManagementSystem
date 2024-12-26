@@ -13,13 +13,13 @@ const UpperNavBar = () => {
   };
 
   return (
-    <div className="flex flex-col bg-gray-200 p-2 sticky top-0 z-50">
+    <div className="flex flex-col bg-gray-200 p-2 sticky top-0 z-50 navy-button">
       <div className="flex items-center justify-between">
         <img
           src={menu}
           alt="menu icon"
           onClick={showNavBar}
-          className="w-[2rem] cursor-pointer lg:hidden"
+          className="w-[2rem] cursor-pointer lg:hidden filter invert"
         />
         <h1 className="title text-center flex-grow pb-2" id="main-title">
           Inventory Management System

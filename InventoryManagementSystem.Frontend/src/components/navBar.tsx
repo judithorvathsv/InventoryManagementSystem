@@ -10,7 +10,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
           <NavLink
             to="/products"
             className={({ isActive }) =>
-              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+              `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
               }`
             }
@@ -23,7 +23,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
           <NavLink
             to="/newpurchase"
             className={({ isActive }) =>
-              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+              `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
               }`
             }
@@ -36,7 +36,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
           <NavLink
             to="/purchases"
             className={({ isActive }) =>
-              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+              `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
               }`
             }
@@ -49,7 +49,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
           <NavLink
             to="/incoming-purchases"
             className={({ isActive }) =>
-              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+              `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
               }`
             }
@@ -62,7 +62,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
           <NavLink
             to="/inventory"
             className={({ isActive }) =>
-              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+              `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
               }`
             }
@@ -75,7 +75,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
           <NavLink
             to="/neworder"
             className={({ isActive }) =>
-              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+              `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
               }`
             }
@@ -84,12 +84,11 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
           </NavLink>
         </li>
 
-
         <li onClick={hideMobileNavBar}>
           <NavLink
             to="/orders"
             className={({ isActive }) =>
-              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+              `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
               }`
             }
@@ -102,7 +101,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
           <NavLink
             to="/outgoing-orders"
             className={({ isActive }) =>
-              `block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+              `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
               }`
             }
@@ -111,8 +110,18 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
           </NavLink>
         </li>
 
-
-
+        <li onClick={hideMobileNavBar}>
+          <NavLink
+            to="/linechart"
+            className={({ isActive }) =>
+              `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
+                isActive ? "active-link font-bolder text-lg" : "text-black"
+              }`
+            }
+          >
+            Purchase diagram
+          </NavLink>
+        </li>
       </ul>
     </aside>
   );

@@ -3,7 +3,7 @@ import { OrderContext } from "../context/OrderContextProvider";
 import { OrderProps } from "../types";
 
 const OutgoingOrders = () => {
-  const { orders, errorMessage, updateOrderStatus, updateFromDatabase } = useContext(OrderContext);
+  const { orders, errorMessage, updateOrderStatus } = useContext(OrderContext);
   const [selectedOrder, setSelectedOrder] = useState<OrderProps | null>(null);
   const [actionType, setActionType] = useState("");
   const [error, setError] = useState("")
@@ -53,7 +53,7 @@ const OutgoingOrders = () => {
         }  
        
         handleCloseForm();
-        updateFromDatabase();
+        await updateOrderStatus(selectedOrder.id!, 2);
       } catch (error) {
         if (error instanceof Error) {
             console.error("Error: ", error);
