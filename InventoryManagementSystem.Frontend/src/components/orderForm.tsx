@@ -104,7 +104,7 @@ const OrderForm = () => {
         setErrorMessage("");
         updateFromDatabase();
         navigate("/InventoryManagementSystem/orders", { 
-          state: { message: `Purchase created for ${order.productName}` }
+          state: { message: `Order created for ${order.productName}` }
         })
       } 
     } catch (error) {

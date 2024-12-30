@@ -18,11 +18,19 @@ const IncomingPurchases = () => {
   const handleReceive = (purchase: PurchaseProps) => {
     setSelectedPurchase(purchase);
     setActionType("receive");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleReturn = (purchase: PurchaseProps) => {
     setSelectedPurchase(purchase);
     setActionType("return");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleCancel = () => {

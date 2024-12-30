@@ -42,10 +42,10 @@ const ComparisonChart: React.FC = () => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis label={{ value: 'Cost (SEK)', angle: -90, position: 'insideLeft' }} />
+          <YAxis label={{ value: 'Cost (SEK)', angle: -90, position: 'insideLeft', offset: -5 }} />
           <Tooltip formatter={(value) => `${Number(value).toFixed(2)} SEK`} />
           <Legend />
-          <Bar dataKey="cost" fill="#8884d8" />
+          <Bar dataKey="cost" fill="#2563eb" />
         </BarChart>
       </ResponsiveContainer>
     </div>
