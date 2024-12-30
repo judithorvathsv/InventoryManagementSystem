@@ -48,7 +48,7 @@ const IncomingPurchases = () => {
     <div className="flex flex-col items-center w-full p-4">
       <h2 className="mb-12 text-center title bold-title">Incoming Purchases</h2>
 
-      {errorMessage && <div className="text-center">{errorMessage}</div>}
+      {errorMessage && <div className="text-center red-text">{errorMessage}</div>}
 
       {selectedPurchase && (
         <div className="mt-4 mb-8 p-4 border rounded-lg bg-white shadow-md">

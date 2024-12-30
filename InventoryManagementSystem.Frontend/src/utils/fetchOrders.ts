@@ -15,7 +15,7 @@ export const fetchOrders = async (): Promise<{
       throw new Error(errorMessage);
     }
 
-    result = await response.json();
+    result = await response.json();    
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Error: ", error);

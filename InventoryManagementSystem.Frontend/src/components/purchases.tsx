@@ -28,7 +28,7 @@ const Purchases = () => {
         Show cost in diagram
       </NavLink>
 
-      {errorMessage && <div className="text-center">{errorMessage}</div>}
+      {errorMessage && <div className="text-center red-text">{errorMessage}</div>}
 
       {notification && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
