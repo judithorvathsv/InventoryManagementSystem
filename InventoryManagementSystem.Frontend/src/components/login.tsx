@@ -6,7 +6,7 @@ const Login = () => {
       <img
         src={storage}
         alt="storage image"
-        className="hidden md:block w-1/2 lg:w-1/2 h-screen object-cover p-1"
+        className="hidden md:block w-1/2 lg:w-1/2 h-[calc(100vh-5.5rem)] object-cover p-1"
       />
 
       <article className="flex flex-col items-center justify-center w-full md:w-1/2 lg:w-1/2 xl:w-1/2 p-4">
