@@ -88,21 +88,25 @@ const OrderForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create purchase");
+        console.error("Error creating order.");
+        setErrorMessage("Failed to create order.");
       }
-
-      setOrder({
-        productId: 0,
-        productName: "",
-        customerName: "",
-        orderDate: "",
-        quantity: 0,
-        unitPrice: 0,
-        totalPrice: 0,
-      });
-      setErrorMessage("");
-      updateFromDatabase();
-      navigate("/orders");
+      else{
+        setOrder({
+          productId: 0,
+          productName: "",
+          customerName: "",
+          orderDate: "",
+          quantity: 0,
+          unitPrice: 0,
+          totalPrice: 0,
+        });
+        setErrorMessage("");
+        updateFromDatabase();
+        navigate("/orders", { 
+          state: { message: `Purchase created for ${order.productName}` }
+        })
+      } 
     } catch (error) {
       console.error("Error creating order:", error);
       setErrorMessage("Failed to create order.");

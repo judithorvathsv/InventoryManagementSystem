@@ -1,10 +1,21 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { OrderContext } from "../context/OrderContextProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { formatDate } from "../utils/formatDateTime";
 
 const Orders = () => {
   const { orders, errorMessage } = useContext(OrderContext);
+
+  const location = useLocation();
+  const [notification, setNotification] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (location.state && location.state.message) {
+      setNotification(location.state.message);
+      const timer = setTimeout(() => setNotification(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [location])
 
   return (
     <div className="flex flex-col items-center w-full p-4">
@@ -18,6 +29,12 @@ const Orders = () => {
       </Link>
 
       {errorMessage && <div className="text-center">{errorMessage}</div>}
+
+      {notification && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+          {notification}
+        </div>
+      )}
 
       {orders.length > 0 ? (
         <div className="overflow-x-auto w-full">
