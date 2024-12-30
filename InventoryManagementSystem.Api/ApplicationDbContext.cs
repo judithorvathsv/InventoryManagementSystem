@@ -31,8 +31,8 @@ namespace InventoryManagementSystem.Api
 
             modelBuilder.Entity<OrderStatus>().HasData(
                 new OrderStatus { Id = 1, Name = "Processing" },
-                new OrderStatus { Id = 2, Name = "Delivered" },
-                new OrderStatus { Id = 3, Name = "Returned" } 
+                new OrderStatus { Id = 2, Name = "Sent" },
+                new OrderStatus { Id = 3, Name = "Cancelled" } 
             );
         }
 

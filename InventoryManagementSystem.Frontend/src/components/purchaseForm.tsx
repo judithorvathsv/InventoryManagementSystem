@@ -92,7 +92,9 @@ const PurchaseForm = () => {
         categoryId: 0,
       });
       setErrorMessage("");
-      navigate("/purchases");
+      navigate("/purchases", { 
+        state: { message: `Purchase created for ${product.productName}` }
+      })
     } catch (error) {
       console.error("Error creating purchase:", error);
       setErrorMessage("Failed to create purchase.");

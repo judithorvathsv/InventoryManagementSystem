@@ -63,7 +63,7 @@ const Orders = () => {
                     className={`border border-gray-300 p-2 ${
                       order.status === "Processing"
                         ? "green-text"
-                        : order.status === "Returned"
+                        : order.status === "Cancelled"
                         ? "red-text"
                         : ""
                     }`}
@@ -119,7 +119,7 @@ const Orders = () => {
                     className={`w-2/3 ${
                       order.status === "Processing"
                         ? "green-text"
-                        : order.status === "Returned"
+                        : order.status === "Cancelled"
                         ? "red-text"
                         : ""
                     }`}

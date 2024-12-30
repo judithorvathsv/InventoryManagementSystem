@@ -1,10 +1,21 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { PurchaseContext } from "../context/PurchaseContextProvider";
 import { formatDate } from "../utils/formatDateTime";
 
 const Purchases = () => {
   const { purchases, errorMessage } = useContext(PurchaseContext);
+
+  const location = useLocation();
+  const [notification, setNotification] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (location.state && location.state.message) {
+      setNotification(location.state.message);
+      const timer = setTimeout(() => setNotification(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [location])
 
   return (
     <div className="flex flex-col items-center w-full p-4">
@@ -18,6 +29,12 @@ const Purchases = () => {
       </Link>
 
       {errorMessage && <div className="text-center">{errorMessage}</div>}
+
+      {notification && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+          {notification}
+        </div>
+      )}
 
       {purchases.length > 0 ? (
         <div className="overflow-x-auto w-full">
@@ -111,9 +128,9 @@ const Purchases = () => {
                   <p
                     className={`w-2/3 ${
                       purchase.status === "Incoming"
-                        ? "text-green-500"
+                        ? "green-text"
                         : purchase.status === "Returned"
-                        ? "text-red-500"
+                        ? "red-text"
                         : ""
                     }`}
                   >

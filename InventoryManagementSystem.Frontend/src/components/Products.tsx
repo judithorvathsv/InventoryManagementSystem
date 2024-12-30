@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { PurchaseContext } from "../context/PurchaseContextProvider";
 
 const Products = () => {
+  const [notification, setNotification] = useState<string | null>(null);
   const { purchases, errorMessage } = useContext(PurchaseContext);
   const [error, setError] = useState("");
 
@@ -118,11 +119,17 @@ const Products = () => {
         }
       );
 
-      if (!response.ok) throw new Error("Failed to create purchase");
-
-      console.log("Purchase created successfully");
-      handleCancelPurchase();
-      window.location.reload();
+      if (!response.ok){
+        console.error("Error creating purchase:", error);
+        setError("Failed to create purchase");
+      } 
+      else{
+        console.log("Purchase created successfully");
+        setNotification(`Purchase created for ${purchaseData.productName}`);
+        setTimeout(() => setNotification(null), 4000);
+        handleCancelPurchase();      
+        setTimeout(() => window.location.reload(), 4000);
+      }
     } catch (error) {
       console.error("Error creating purchase:", error);
       setError("Failed to create purchase");
@@ -162,6 +169,12 @@ const Products = () => {
         <div className="text-center red-text">{errorMessage}</div>
       )}
       {error && <div className="text-center red-text">{error}</div>}
+
+      {notification && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+          {notification}
+        </div>
+      )}
 
       {showPurchaseForm && selectedProduct && (
         <form
