@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import storage from "../../public/images/storage.jpg";
 const Login = () => {
   return (
@@ -39,7 +39,7 @@ const Login = () => {
             />
           </div>
         </section>       
-        <Link className="mt-4 blue-button all-button" to={"/products"}>Login</Link>
+        <NavLink className="mt-4 blue-button all-button" to={"/InventoryManagementSystem/products"}>Login</NavLink>
       </article>
     </article>
   );

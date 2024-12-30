@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { PurchaseContext } from "../context/PurchaseContextProvider";
 import { formatDate } from "../utils/formatDateTime";
 
@@ -21,12 +21,12 @@ const Purchases = () => {
     <div className="flex flex-col items-center w-full p-4">
       <h2 className="mb-4 text-center title bold-title">All Purchases</h2>
 
-      <Link
+      <NavLink
         className="blue-button all-button mb-4 text-center md:self-end"
-        to={"/linechart"}
+        to={"/InventoryManagementSystem/linechart"}
       >
         Show cost in diagram
-      </Link>
+      </NavLink>
 
       {errorMessage && <div className="text-center">{errorMessage}</div>}
 

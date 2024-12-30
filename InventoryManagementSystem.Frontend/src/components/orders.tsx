@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { OrderContext } from "../context/OrderContextProvider";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { formatDate } from "../utils/formatDateTime";
 
 const Orders = () => {
@@ -21,12 +21,12 @@ const Orders = () => {
     <div className="flex flex-col items-center w-full p-4">
       <h2 className="mb-4 text-center title bold-title">All Orders</h2>
 
-      <Link
+      <NavLink
         className="blue-button all-button mb-4 text-center md:self-end"
-        to={"/neworder"}
+        to={"/InventoryManagementSystem/neworder"}
       >
         New Order
-      </Link>
+      </NavLink>
 
       {errorMessage && <div className="text-center">{errorMessage}</div>}
 

@@ -103,7 +103,7 @@ const OrderForm = () => {
         });
         setErrorMessage("");
         updateFromDatabase();
-        navigate("/orders", { 
+        navigate("/InventoryManagementSystem/orders", { 
           state: { message: `Purchase created for ${order.productName}` }
         })
       } 
@@ -124,7 +124,7 @@ const OrderForm = () => {
       totalPrice: 0,
     });
     setErrorMessage("");
-    navigate("/orders");
+    navigate("/InventoryManagementSystem/orders");
   };
 
   return (

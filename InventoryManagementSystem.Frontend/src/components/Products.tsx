@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useState } from "react";
 import { ProductDatabaseProps, PurchaseSummary } from "../types";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { PurchaseContext } from "../context/PurchaseContextProvider";
 
 const Products = () => {
@@ -158,12 +158,12 @@ const Products = () => {
     <div className="flex flex-col items-center w-full p-4">
       <h2 className="mb-4 text-center title bold-title">All Products</h2>
 
-      <Link
+      <NavLink
         className="blue-button all-button mb-4 text-center md:self-end"
-        to={"/newpurchase"}
+        to={"/InventoryManagementSystem/newpurchase"}
       >
         New Purchase
-      </Link>
+      </NavLink>
 
       {errorMessage && (
         <div className="text-center red-text">{errorMessage}</div>

@@ -8,7 +8,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
       <ul className="flex flex-col space-y-4">
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/products"
+            to={"products"}
             className={({ isActive }) =>
               `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
@@ -21,7 +21,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
 
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/newpurchase"
+            to="newpurchase"
             className={({ isActive }) =>
               `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
@@ -34,7 +34,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
 
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/purchases"
+            to="purchases"
             className={({ isActive }) =>
               `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
@@ -47,7 +47,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
 
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/incoming-purchases"
+            to="incoming-purchases"
             className={({ isActive }) =>
               `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
@@ -60,7 +60,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
 
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/inventory"
+            to="inventory"
             className={({ isActive }) =>
               `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
@@ -73,7 +73,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
 
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/neworder"
+            to="neworder"
             className={({ isActive }) =>
               `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
@@ -86,7 +86,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
 
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/orders"
+            to="orders"
             className={({ isActive }) =>
               `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
@@ -99,7 +99,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
 
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/outgoing-orders"
+            to="outgoing-orders"
             className={({ isActive }) =>
               `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"
@@ -112,7 +112,7 @@ const NavBar = ({ hideMobileNavBar }: { hideMobileNavBar: () => void }) => {
 
         <li onClick={hideMobileNavBar}>
           <NavLink
-            to="/linechart"
+            to="linechart"
             className={({ isActive }) =>
               `transform hover:scale-105 block p-2 hover:bg-white rounded transition-colors duration-200 hover:shadow-lg hover:shadow-gray-400 font-normal hover:font-bolder ${
                 isActive ? "active-link font-bolder text-lg" : "text-black"

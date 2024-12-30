@@ -92,7 +92,7 @@ const PurchaseForm = () => {
         categoryId: 0,
       });
       setErrorMessage("");
-      navigate("/purchases", { 
+      navigate("/InventoryManagementSystem/purchases", { 
         state: { message: `Purchase created for ${product.productName}` }
       })
     } catch (error) {
@@ -112,7 +112,7 @@ const PurchaseForm = () => {
     });
     setErrorMessage("");
 
-    navigate("/products");
+    navigate("/InventoryManagementSystem/products");
   };
 
   return (
