@@ -36,14 +36,12 @@ jobs:
         run: cd InventoryManagement.Frontend
 
       - name: Install dependencies
-        run: |
-          cd InventoryManagement.Frontend
-          npm install 
+        run: npm install
+        working-directory: InventoryManagementSystem.Frontend
 
       - name: Build the project
-        run: |
-          cd InventoryManagement.Frontend
-          npm run build
+        run: npm run build
+        working-directory: InventoryManagementSystem.Frontend
        
       - name: Setup Pages
         uses: actions/configure-pages@v5
