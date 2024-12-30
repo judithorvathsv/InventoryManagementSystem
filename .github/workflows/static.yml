@@ -32,9 +32,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4      
        
-      - run: npm i
+      - name: Change to Frontend
+        run: cd InventoryManagement.Frontend
 
-      - run: npm run build
+      - name: Install dependencies
+        run: |
+          cd InventoryManagement.Frontend
+          npm install 
+
+      - name: Build the project
+        run: |
+          cd InventoryManagement.Frontend
+          npm run build
        
       - name: Setup Pages
         uses: actions/configure-pages@v5
