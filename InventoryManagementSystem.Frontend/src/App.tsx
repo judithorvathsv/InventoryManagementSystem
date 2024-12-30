@@ -11,13 +11,13 @@ function App() {
   return (
     <div className={isLogin ? "" : "flex h-full"}>
       {!isLogin && (
-        <div className="hidden lg:block z-50 h-screen">
+        <div className="hidden lg:block z-50 h-screen lg:fixed">
           <div className="sideNavBar"></div>
           <NavBar hideMobileNavBar={hideMobileNavBar} />
         </div>
       )}
 
-      <div className={isLogin ? "w-full" : "flex-grow"}>
+      <div className={isLogin ? "w-full" : "flex-grow lg:ml-52"}>
         <UpperNavBar />
         <Outlet />
       </div>

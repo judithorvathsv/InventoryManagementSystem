@@ -23,7 +23,7 @@ const Purchases = () => {
 
       <Link
         className="blue-button all-button mb-4 text-center md:self-end"
-        to={"/"}
+        to={"/linechart"}
       >
         Show cost in diagram
       </Link>
