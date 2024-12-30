@@ -20,7 +20,8 @@ import Charts from "./components/charts";
 
 const router = createBrowserRouter([
   {
-    path: "/InventoryManagementSystem/",
+   // path: "/InventoryManagementSystem/", //locally
+     path: "/", //github
     element: <App />,
     children: [
       {
