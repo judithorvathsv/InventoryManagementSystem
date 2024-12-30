@@ -1,33 +1,33 @@
-#Inventory Management System
+# Inventory Management System
 
-##Overview
-The Inventory Management System is designed to tracking, purchase management, and order processing. This application features a .NET Web API backend and a React frontend, providing a user-friendly interface.
+## Overview
+The Inventory Management System is designed for tracking, purchase management, and order processing. This application features a .NET Web API backend and a React frontend, providing a user-friendly interface.
 
-###Wireframe:
+### Wireframe:
 ![Inventory_Management_System7](https://github.com/user-attachments/assets/8af752d8-ea8a-43a4-9cc3-a38a73739cd0)
 
-##Features
-###Product Management
-- Add new products to the system and manage them<br/>
-- View all products in the inventory <br/>
+## Features
+### Product Management
+- Add new products to the system and manage them
+- View all products in the inventory
 
-###Inventory Overview
-- Display a list of all products<br/>
-- Calculate and show the total value of inventory<br/>
+### Inventory Overview
+- Display a list of all products
+- Calculate and show the total value of inventory
 
-###Purchase Tracking
-- View all purchases, including total cost and status<br/>
-- Visualize purchase history through interactive diagrams<br/>
-- Track and manage incoming purchases for receiving or returns<br/>
+### Purchase Tracking
+- View all purchases, including total cost and status
+- Visualize purchase history through interactive diagrams
+- Track and manage incoming purchases for receiving or returns
 
-###Order Management
-- View and manage all customer orders<br/>
-- Process order shipments or cancellations<br/>
+### Order Management
+- View and manage all customer orders
+- Process order shipments or cancellations
 
-###Technical Stack
-- Backend: .NET Web API<br/>
-- Frontend: React<br/>
-- Database: SQL Server<br/>
+### Technical Stack
+- Backend: .NET Web API
+- Frontend: React
+- Database: SQL Server
 
 ###User stories:
 
