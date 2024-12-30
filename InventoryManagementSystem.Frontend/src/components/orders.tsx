@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { OrderContext } from "../context/OrderContextProvider";
 import { Link } from "react-router-dom";
+import { formatDate } from "../utils/formatDateTime";
 
 const Orders = () => {
   const { orders, errorMessage } = useContext(OrderContext);
@@ -53,7 +54,7 @@ const Orders = () => {
                     {order.quantity}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {new Date(order.orderDate).toLocaleDateString()}
+                    {formatDate(order.orderDate)}
                   </td>
                   <td className="border border-gray-300 p-2">
                     {(order.quantity * order.unitPrice).toFixed(2)}
@@ -102,9 +103,7 @@ const Orders = () => {
 
                 <div className="flex items-center mb-2">
                   <label className="font-bold w-1/3">Date:</label>
-                  <p className="w-2/3">
-                    {new Date(order.orderDate).toLocaleDateString()}
-                  </p>
+                  <p className="w-2/3">{formatDate(order.orderDate)}</p>
                 </div>
 
                 <div className="flex items-center mb-2">

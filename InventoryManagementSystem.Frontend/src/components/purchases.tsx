@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { PurchaseContext } from "../context/PurchaseContextProvider";
+import { formatDate } from "../utils/formatDateTime";
 
 const Purchases = () => {
   const { purchases, errorMessage } = useContext(PurchaseContext);
@@ -47,7 +48,7 @@ const Purchases = () => {
                     {purchase.quantity}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {new Date(purchase.purchaseDate).toLocaleDateString()}
+                    {formatDate(purchase.purchaseDate)}
                   </td>
                   <td className="border border-gray-300 p-2">
                     {(purchase.quantity * purchase.unitPrice).toFixed(2)}
@@ -95,9 +96,7 @@ const Purchases = () => {
 
                 <div className="flex items-center mb-2">
                   <label className="font-bold w-1/3">Date:</label>
-                  <p className="w-2/3">
-                    {new Date(purchase.purchaseDate).toLocaleDateString()}
-                  </p>
+                  <p className="w-2/3">{formatDate(purchase.purchaseDate)}</p>
                 </div>
 
                 <div className="flex items-center mb-2">

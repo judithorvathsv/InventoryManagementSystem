@@ -1,16 +1,15 @@
 import { useContext, useState } from "react";
 import { OrderContext } from "../context/OrderContextProvider";
 import { OrderProps } from "../types";
+import { formatDate } from "../utils/formatDateTime";
 
 const OutgoingOrders = () => {
   const { orders, errorMessage, updateOrderStatus } = useContext(OrderContext);
   const [selectedOrder, setSelectedOrder] = useState<OrderProps | null>(null);
   const [actionType, setActionType] = useState("");
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
-  const outgoingOrders = orders.filter(
-    (order) => order.orderStatusId === 1
-  );  
+  const outgoingOrders = orders.filter((order) => order.orderStatusId === 1);
 
   const handleCloseForm = () => {
     setSelectedOrder(null);
@@ -29,39 +28,42 @@ const OutgoingOrders = () => {
   };
 
   const handleConfirmSend = async () => {
-    if (selectedOrder) {     
+    if (selectedOrder) {
       const request = {
-        ProductName : selectedOrder.productName,
+        ProductName: selectedOrder.productName,
         ProductId: selectedOrder.productId,
         Quantity: selectedOrder.quantity,
         CustomerName: selectedOrder.customerName,
         OrderDate: selectedOrder.orderDate,
         UnitPrice: selectedOrder.unitPrice,
-      };      
-  
+      };
+
       try {
-        const response = await fetch(`http://localhost:5036/api/v1/orders/${selectedOrder.id}/send`, {
-          method: 'PUT',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(request),
-        });
-  
+        const response = await fetch(
+          `http://localhost:5036/api/v1/orders/${selectedOrder.id}/send`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(request),
+          }
+        );
+
         if (!response.ok) {
-            const errorData = await response.json();     
-            setError(errorData);
-            throw new Error(errorData.message || 'Failed to send order');
-        }  
-       
+          const errorData = await response.json();
+          setError(errorData);
+          throw new Error(errorData.message || "Failed to send order");
+        }
+
         handleCloseForm();
         await updateOrderStatus(selectedOrder.id!, 2);
       } catch (error) {
         if (error instanceof Error) {
-            console.error("Error: ", error);
-            setError(error.message);
-          } else {
-            console.error("Unexpected error:", error);
-            setError("An unexpected error occurred");
-          }         
+          console.error("Error: ", error);
+          setError(error.message);
+        } else {
+          console.error("Unexpected error:", error);
+          setError("An unexpected error occurred");
+        }
       }
     }
   };
@@ -77,7 +79,9 @@ const OutgoingOrders = () => {
     <div className="flex flex-col items-center w-full p-4">
       <h2 className="mb-12 text-center title bold-title">Outgoing Orders</h2>
 
-      {errorMessage && <div className="text-center red-text">{errorMessage}</div>}
+      {errorMessage && (
+        <div className="text-center red-text">{errorMessage}</div>
+      )}
       {error && <div className="text-center red-text">{error}</div>}
 
       {selectedOrder && (
@@ -143,7 +147,7 @@ const OutgoingOrders = () => {
                 <th className="border border-gray-300 p-2">Order Date</th>
                 <th className="border border-gray-300 p-2">
                   Total Price (sek)
-                </th>              
+                </th>
                 <th className="border border-gray-300 p-2">Actions</th>
               </tr>
             </thead>
@@ -164,12 +168,12 @@ const OutgoingOrders = () => {
                     {order.quantity}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {new Date(order.orderDate).toLocaleDateString()}
+                    {formatDate(order.orderDate)}
                   </td>
                   <td className="border border-gray-300 p-2">
                     {(order.quantity * order.unitPrice).toFixed(2)}
                   </td>
-    
+
                   <td className="border border-gray-300 p-2 w-2/7">
                     <div className="flex flex-col md:flex-row md:space-x-2">
                       <button
@@ -219,9 +223,7 @@ const OutgoingOrders = () => {
 
                 <div className="flex items-center mb-2">
                   <label className="font-bold w-1/3">Date:</label>
-                  <p className="w-2/3">
-                    {new Date(order.orderDate).toLocaleDateString()}
-                  </p>
+                  <p className="w-2/3">{formatDate(order.orderDate)}</p>
                 </div>
 
                 <div className="flex items-center mb-2">

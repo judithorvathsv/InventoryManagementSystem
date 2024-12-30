@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 
 import { PurchaseContext } from "../context/PurchaseContextProvider";
 import { PurchaseProps } from "../types";
+import { formatDate } from "../utils/formatDateTime";
 
 const IncomingPurchases = () => {
   const { purchases, errorMessage, updatePurchaseStatus } =
@@ -127,7 +128,7 @@ const IncomingPurchases = () => {
                     {purchase.quantity}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {new Date(purchase.purchaseDate).toLocaleDateString()}
+                    {formatDate(purchase.purchaseDate)}
                   </td>
                   <td className="border border-gray-300 p-2">
                     {(purchase.quantity * purchase.unitPrice).toFixed(2)}
@@ -181,9 +182,7 @@ const IncomingPurchases = () => {
 
                 <div className="flex items-center mb-2">
                   <label className="font-bold w-1/3">Date:</label>
-                  <p className="w-2/3">
-                    {new Date(purchase.purchaseDate).toLocaleDateString()}
-                  </p>
+                  <p className="w-2/3">{formatDate(purchase.purchaseDate)}</p>
                 </div>
 
                 <div className="flex items-center mb-2">
