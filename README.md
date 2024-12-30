@@ -5,7 +5,7 @@ The Inventory Management System is designed for tracking, purchase management, a
 
 ### Wireframe:
 ![Inventory_Management_System7](https://github.com/user-attachments/assets/8af752d8-ea8a-43a4-9cc3-a38a73739cd0)
-
+(login and search are not implemented)
 ## Features
 ### Product Management
 - Add new products to the system and manage them
